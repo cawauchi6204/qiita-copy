@@ -33,6 +33,7 @@
 - hp_url string
 - location string
 - email string
+- password
 - is_deleted boolean
 ### 記事(posts)
 - id int PRIMARY_KEY
