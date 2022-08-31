@@ -45,11 +45,11 @@ func main() {
 	})
 	db := dbConnect()
 	r.GET("/users", func(c *gin.Context) {
-		user := User{}
-		if err := db.First(&user).Error; err != nil {
+		users := []User{}
+		if err := db.Find(&users).Error; err != nil {
 			fmt.Println(err)
 		}
-		c.JSON(http.StatusOK, user)
+		c.JSON(http.StatusOK, users)
 	})
 	deployPort := os.Getenv("PORT")
 	if deployPort == "" {
