@@ -3,7 +3,7 @@ FROM golang:1.17.0-alpine3.14
 ENV ROOT=/go/src/app
 WORKDIR ${ROOT}
 
-RUN apk update && apk add git && go install github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+RUN apk update && apk add git
 
 COPY ./main.go ${ROOT}
 
