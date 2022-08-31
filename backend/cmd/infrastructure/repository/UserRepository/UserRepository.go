@@ -24,9 +24,18 @@ type User struct {
 
 // TODO: 今は特化関数だがBuilderパターンにしてuseCase層でimportしてビジネスロジック関数を組み立てたい
 
-func FindAll() {
-	users := []User{}
+func FindAll() (users []User) {
+	users = []User{}
 	if err := repository.DB.Find(&users).Error; err != nil {
 		fmt.Println(err)
 	}
+	return
+}
+
+func FindById(userId int) (user User) {
+	user = User{}
+	if err := repository.DB.First(&user, userId).Error; err != nil {
+		fmt.Println(err)
+	}
+	return
 }
