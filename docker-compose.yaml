@@ -37,6 +37,12 @@ services:
       MYSQL_PASSWORD: password
     volumes:
       - ./db/migrations/migrations:/migrations
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - app
 volumes:
   db_volume:
     driver: local
