@@ -1,11 +1,11 @@
 version: "3"
 services:
   app:
-    build: .
+    build: ./backend/
     depends_on:
       - db
     volumes:
-      - ./:/go/src/app
+      - ./backend/:/go/src/app
     tty: true
 
   db:
