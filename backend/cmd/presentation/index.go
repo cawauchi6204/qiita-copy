@@ -5,11 +5,13 @@ import (
 	"strconv"
 
 	"github.com/cawauchi6204/qiita-copy/cmd/application/service"
+	"github.com/cawauchi6204/qiita-copy/cmd/infrastructure/repository/UserRepository"
+	"github.com/cawauchi6204/qiita-copy/cmd/middleware"
 	"github.com/gin-gonic/gin"
 )
 
 func Main() {
-	r := gin.Default()
+	r := middleware.Router()
 	r.GET("/users", func(c *gin.Context) {
 		users := service.GetAllUser()
 		c.JSON(200, users)
@@ -20,8 +22,11 @@ func Main() {
 		user := service.GetUserById(i)
 		c.JSON(200, user)
 	})
-	r.POST("/user/create", func(c *gin.Context) {
-
+	r.POST("/user", func(c *gin.Context) {
+		var user UserRepository.User
+		c.BindJSON(&user)
+		u := service.SaveUser(user)
+		c.JSON(200, u)
 	})
 	deployPort := os.Getenv("PORT")
 	if deployPort == "" {
