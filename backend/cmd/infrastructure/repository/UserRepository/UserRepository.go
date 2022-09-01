@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/cawauchi6204/qiita-copy/cmd/infrastructure/repository"
+	"gorm.io/gorm"
 )
 
 type User struct {
@@ -38,4 +39,11 @@ func FindById(userId int) (user User) {
 		fmt.Println(err)
 	}
 	return
+}
+
+func Save(user User) (result *gorm.DB) {
+	if err := repository.DB.Create(&user).Error; err != nil {
+		fmt.Println(err)
+	}
+	return repository.DB.Create(&user)
 }
