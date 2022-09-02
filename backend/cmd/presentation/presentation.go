@@ -3,7 +3,7 @@ package presentation
 import (
 	"os"
 
-	"github.com/cawauchi6204/qiita-copy/cmd/middleware"
+	"github.com/cawauchi6204/qiita-copy/middleware"
 	"github.com/gin-gonic/gin"
 )
 

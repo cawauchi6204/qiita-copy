@@ -9,7 +9,9 @@ COPY ./main.go ${ROOT}
 COPY ./cmd/ ${ROOT}
 COPY .air.toml ${ROOT}
 COPY go.mod ${ROOT}
+COPY go.sum ${ROOT}
 
-RUN go clean
 RUN go mod tidy
+RUN ls
+
 CMD ["air", "-c", ".air.toml"]
