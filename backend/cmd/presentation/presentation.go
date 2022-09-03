@@ -25,7 +25,7 @@ func Router() {
 	r.POST("/user", func(c *gin.Context) {
 		var user repository.User
 		c.BindJSON(&user)
-		service.CreateUser(user)
+		service.Signup(user.Name, user.Email, user.Password)
 		c.JSON(200, "成功したかも")
 	})
 

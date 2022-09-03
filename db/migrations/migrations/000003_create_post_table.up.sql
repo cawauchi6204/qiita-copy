@@ -1,7 +1,7 @@
 CREATE TABLE
   IF NOT EXISTS posts(
     id serial PRIMARY KEY,
-    title VARCHAR (50) UNIQUE NOT NULL,
+    title VARCHAR (50) NOT NULL,
     body TEXT NOT NULL,
     posted_by INTEGER NOT NULL,
     organization_id INTEGER,
