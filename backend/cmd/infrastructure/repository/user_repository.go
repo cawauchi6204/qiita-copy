@@ -3,8 +3,6 @@ package repository
 import (
 	"fmt"
 	"time"
-
-	"gorm.io/gorm"
 )
 
 type User struct {
@@ -13,13 +11,13 @@ type User struct {
 	Password       string    `json:"password"`
 	Email          string    `json:"email"`
 	Nickname       string    `json:"nickname"`
+	Description    string    `json:"description"`
 	HpUrl          string    `json:"hp_url"`
 	Location       string    `json:"location"`
 	GithubAccount  string    `json:"github_account_id"`
 	OrganizationId int       `json:"organization_id"`
 	IsDeleted      int       `json:"is_deleted"`
 	CreatedAt      time.Time `json:"createdAt"`
-	UpdatedAt      time.Time `json:"updatedAt"`
 }
 
 // TODO: 今は特化関数だがBuilderパターンにしてuseCase層でimportしてビジネスロジック関数を組み立てたい
@@ -40,9 +38,9 @@ func FindUserById(userId int) (user User) {
 	return
 }
 
-func SaveUser(user User) (result *gorm.DB) {
+func CreateUser(user User) error {
 	if err := DB.Create(&user).Error; err != nil {
-		fmt.Println(err)
+		return err
 	}
-	return DB.Create(&user)
+	return nil
 }

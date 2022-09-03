@@ -7,13 +7,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Router() (r *gin.Engine) {
+func Middleware() (r *gin.Engine) {
 	r = gin.Default()
 	r.Use(cors.New(cors.Config{
 		// アクセスを許可したいアクセス元
 		AllowOrigins: []string{
-			`http://localhost:3000`,
 			`http://localhost:80`,
+			`http://localhost:3000`,
+			`http://localhost`,
 		},
 		// アクセスを許可したいHTTPメソッド
 		AllowMethods: []string{
