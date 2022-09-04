@@ -1,12 +1,16 @@
 package middleware
 
 import (
+	"encoding/json"
+	"net/http"
 	"time"
 
+	"github.com/cawauchi6204/qiita-copy/cmd/infrastructure/repository"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
+	"github.com/koron/go-dproxy"
 )
 
 func Middleware() (r *gin.Engine) {
@@ -41,4 +45,25 @@ func Middleware() (r *gin.Engine) {
 		MaxAge: 24 * time.Hour,
 	}))
 	return
+}
+
+func LoginCheckMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		session := sessions.Default(c)
+		loginUserJson, err := dproxy.New(session.Get("loginUser")).String()
+		if err != nil {
+			c.Status(402)
+			c.Abort()
+		} else {
+			var loginInfo repository.User
+			// Json文字列のアンマーシャル
+			err := json.Unmarshal([]byte(loginUserJson), &loginInfo)
+			if err != nil {
+				c.Status(http.StatusUnauthorized)
+				c.Abort()
+			} else {
+				c.Next()
+			}
+		}
+	}
 }

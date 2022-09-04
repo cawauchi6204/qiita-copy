@@ -14,6 +14,17 @@ const SignUp = ({ }) => {
   const getUser = async () => {
     await axios.get('http://localhost/users')
   }
+  const login = async () => {
+    await axios.post('http://localhost/login', {
+      email, password
+    })
+  }
+  const logout = async () => {
+    await axios.post('http://localhost/logout')
+  }
+  const mypage = async () => {
+    await axios.post('http://localhost/auth/mypage')
+  }
   return (
     <>
       <h2>
@@ -28,6 +39,9 @@ const SignUp = ({ }) => {
         <input type="checkbox" />プライバシーポリシーに同意する<br />
         <button onClick={() => handleSubmit()} className="bg-green-600 hover:bg-red-500 text-white rounded px-4 py-2">登録する</button>
         <button onClick={() => getUser()} className="bg-blue-600 hover:bg-red-500 text-white rounded px-4 py-2">ユーザー情報の取得</button>
+        <button onClick={() => login()} className="bg-blue-600 hover:bg-red-500 text-white rounded px-4 py-2">ログイン</button>
+        <button onClick={() => logout()} className="bg-blue-600 hover:bg-red-500 text-white rounded px-4 py-2">ログアウト</button>
+        <button onClick={() => mypage()} className="bg-blue-600 hover:bg-red-500 text-white rounded px-4 py-2">認証</button>
       </div>
     </>
   )

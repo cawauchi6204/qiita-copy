@@ -1,13 +1,11 @@
 package presentation
 
 import (
-	"net/http"
 	"os"
 	"strconv"
 
 	"github.com/cawauchi6204/qiita-copy/cmd/application/coordinator"
 	"github.com/cawauchi6204/qiita-copy/cmd/application/service"
-	"github.com/cawauchi6204/qiita-copy/cmd/infrastructure/repository"
 	"github.com/cawauchi6204/qiita-copy/cmd/middleware"
 	"github.com/gin-gonic/gin"
 )
@@ -16,10 +14,11 @@ func Router() {
 	r := middleware.Middleware()
 	r.POST("/login", func(c *gin.Context) {
 		coordinator.Login(c)
-		c.String(http.StatusOK, "ログイン完了")
+		c.JSON(200, "成功したかも")
 	})
 	r.POST("/logout", func(c *gin.Context) {
 		coordinator.Logout(c)
+		c.JSON(200, "成功したかも")
 	})
 	r.GET("/users", func(c *gin.Context) {
 		users := service.GetAllUsers()
@@ -32,11 +31,16 @@ func Router() {
 		c.JSON(200, user)
 	})
 	r.POST("/signup", func(c *gin.Context) {
-		var user repository.User
-		c.BindJSON(&user)
 		coordinator.SignUp(c)
 		c.JSON(200, "成功したかも")
 	})
+	authUserGroup := r.Group("/auth")
+	authUserGroup.Use(middleware.LoginCheckMiddleware())
+	{
+		authUserGroup.POST("/mypage", func(c *gin.Context) {
+			c.JSON(200, "認証されています")
+		})
+	}
 
 	deployPort := os.Getenv("PORT")
 	if deployPort == "" {

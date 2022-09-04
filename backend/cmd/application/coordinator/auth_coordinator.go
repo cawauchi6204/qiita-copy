@@ -23,6 +23,7 @@ func SignUp(c *gin.Context) {
 		}
 		user := service.CreateUser(request.Name, request.Email, encryptedPassword)
 		// TODO: 作成されたユーザー情報をreturnしたい
+		Login(c)
 		session := sessions.Default(c)
 		// セッションに格納する為にユーザ情報をJson化
 		loginUser, err := json.Marshal(user)
