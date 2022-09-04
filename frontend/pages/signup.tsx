@@ -7,7 +7,7 @@ const SignUp = ({ }) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const handleSubmit = async () => {
-    await axios.post('http://localhost/user', {
+    await axios.post('http://localhost/signup', {
       name, email, password
     })
   }
