@@ -34,10 +34,10 @@ func Router() {
 		coordinator.SignUp(c)
 		c.JSON(200, "成功したかも")
 	})
-	authUserGroup := r.Group("/auth")
-	authUserGroup.Use(func(c *gin.Context) { middleware.LoginCheckMiddleware(c) })
+	authUserGroup := r.Group("/")
+	authUserGroup.Use(middleware.LoginCheckMiddleware())
 	{
-		authUserGroup.POST("/mypage", func(c *gin.Context) {
+		authUserGroup.GET("/mypage", func(c *gin.Context) {
 			c.JSON(200, "認証されています")
 		})
 	}

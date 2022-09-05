@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/cawauchi6204/qiita-copy/cmd/infrastructure/repository"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
@@ -49,16 +50,15 @@ func Middleware() (r *gin.Engine) {
 	return
 }
 
-func LoginCheckMiddleware(c *gin.Context) gin.HandlerFunc {
+func LoginCheckMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		session := sessions.Default(c)
 		loginUserJson, err := dproxy.New(session.Get("password")).String()
 		if err != nil {
-			c.Status(402)
+			c.Status(402) // 下の分岐で返されるエラーステータスが400のため、一時的にわかりやすいように402にしている
 			c.Abort()
 		} else {
-			var loginInfo interface{}
-			// var loginInfo repository.User
+			var loginInfo repository.User
 			// Json文字列のアンマーシャル
 			err := json.Unmarshal([]byte(loginUserJson), &loginInfo)
 			if err != nil {

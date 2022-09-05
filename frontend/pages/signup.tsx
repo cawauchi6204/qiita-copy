@@ -23,7 +23,7 @@ const SignUp = ({ }) => {
     await axios.post('http://localhost/logout')
   }
   const mypage = async () => {
-    await axios.post('http://localhost/auth/mypage')
+    await axios.get('http://localhost/mypage')
   }
   return (
     <>
