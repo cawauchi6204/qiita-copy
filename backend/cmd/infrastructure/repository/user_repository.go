@@ -42,8 +42,9 @@ func FindUserById(userId int) (user User) {
 }
 
 func FindUserByEmail(email string) (user User) {
+	log.Println(email)
 	user = User{}
-	if err := DB.First(&user, email).Error; err != nil {
+	if err := DB.First(&user, "email = ?", email).Error; err != nil {
 		fmt.Println(err)
 	}
 	return

@@ -15,8 +15,11 @@ import (
 
 func Middleware() (r *gin.Engine) {
 	r = gin.Default()
+	// session設定
 	store := cookie.NewStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))
+
+	// cors設定
 	r.Use(cors.New(cors.Config{
 		// アクセスを許可したいアクセス元
 		AllowOrigins: []string{
