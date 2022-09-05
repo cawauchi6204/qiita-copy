@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/cawauchi6204/qiita-copy/cmd/infrastructure/repository"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
@@ -50,15 +49,16 @@ func Middleware() (r *gin.Engine) {
 	return
 }
 
-func LoginCheckMiddleware() gin.HandlerFunc {
+func LoginCheckMiddleware(c *gin.Context) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		session := sessions.Default(c)
-		loginUserJson, err := dproxy.New(session.Get("loginUser")).String()
+		loginUserJson, err := dproxy.New(session.Get("password")).String()
 		if err != nil {
 			c.Status(402)
 			c.Abort()
 		} else {
-			var loginInfo repository.User
+			var loginInfo interface{}
+			// var loginInfo repository.User
 			// Json文字列のアンマーシャル
 			err := json.Unmarshal([]byte(loginUserJson), &loginInfo)
 			if err != nil {

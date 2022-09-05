@@ -23,7 +23,6 @@ func SignUp(c *gin.Context) {
 		}
 		user := service.CreateUser(request.Name, request.Email, encryptedPassword)
 		// TODO: 作成されたユーザー情報をreturnしたい
-		Login(c)
 		session := sessions.Default(c)
 		// セッションに格納する為にユーザ情報をJson化
 		loginUser, err := json.Marshal(user)
@@ -53,12 +52,12 @@ func Login(c *gin.Context) {
 			session := sessions.Default(c)
 			// セッションに格納する為にユーザ情報をJson化
 			loginUser, err := json.Marshal(user)
-			if err == nil {
+			if err != nil {
+				c.Status(http.StatusInternalServerError)
+			} else {
 				session.Set("loginUser", string(loginUser))
 				session.Save()
 				c.Status(http.StatusOK)
-			} else {
-				c.Status(http.StatusInternalServerError)
 			}
 		}
 	}
