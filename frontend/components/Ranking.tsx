@@ -30,10 +30,10 @@ const Ranking: React.FC<Props> = ({ rankingTitle, rankingUnit, contents }) => {
                   <span>
                     {content.name}
                   </span>
-                  <span>
+                  <div>
                     <span className="font-bold">{content.count}</span>
                     <span>{rankingUnit}</span>
-                  </span>
+                  </div>
                 </li>
               </a>
             </Link>
