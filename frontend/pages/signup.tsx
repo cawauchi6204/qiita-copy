@@ -1,5 +1,6 @@
 import { useState } from "react"
 import axios from "axios"
+import Layout from "../components/Layout"
 
 // TODO: 要リファクタ(汚すぎる)
 const SignUp = ({ }) => {
@@ -15,7 +16,7 @@ const SignUp = ({ }) => {
     await axios.get('http://localhost/users')
   }
   return (
-    <>
+    <Layout>
       <h2>
         Qiitaへようこそ
       </h2>
@@ -29,7 +30,7 @@ const SignUp = ({ }) => {
         <button onClick={() => handleSubmit()} className="bg-green-600 hover:bg-red-500 text-white rounded px-4 py-2">登録する</button>
         <button onClick={() => getUser()} className="bg-blue-600 hover:bg-red-500 text-white rounded px-4 py-2">ユーザー情報の取得</button>
       </div>
-    </>
+    </Layout>
   )
 }
 
