@@ -2,7 +2,6 @@ package coordinator
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/cawauchi6204/qiita-copy/cmd/application/service"
@@ -43,14 +42,12 @@ func Login(c *gin.Context) {
 		user := service.GetUserByEmail(request.Email)
 		// ハッシュ値でのパスワード比較
 		err = crypto.CompareHashAndPassword(user.Password, request.Password)
-		log.Println(err)
 		if err != nil {
 			c.Status(http.StatusBadRequest)
 		} else {
 			cookieKey := "loginUserIdKey"
 			session.NewSession(c, cookieKey, request.Email)
 			c.Redirect(http.StatusFound, "/")
-			log.Println("login最後まで通ったよ")
 		}
 	}
 }

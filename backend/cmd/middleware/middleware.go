@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"log"
 	"net/http"
 	"time"
 
@@ -53,7 +52,6 @@ func LoginCheckMiddleware() gin.HandlerFunc {
 			c.Abort()
 		} else {
 			c.Next()
-			log.Println("通ったわ！！！")
 		}
 	}
 }

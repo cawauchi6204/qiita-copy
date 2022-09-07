@@ -5,7 +5,6 @@ import (
 	"encoding/base64"
 	"fmt"
 	"io"
-	"log"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
@@ -27,23 +26,16 @@ func NewSession(c *gin.Context, cookieKey, redisValue string) {
 		panic("ランダムな文字作成時にエラーが発生じました。")
 	}
 	newRedisKey := base64.URLEncoding.EncodeToString(b)
-	log.Println("newRedisKeyは")
-	log.Println(newRedisKey)
 
 	if err := conn.Set(c, newRedisKey, redisValue, 0).Err(); err != nil {
 		panic("Session登録時にエラーが発生:" + err.Error())
 	}
-	log.Println("redisと接続されました")
 	c.SetCookie(cookieKey, newRedisKey, 0, "/", "localhost", false, false)
 }
 
 func GetSession(c *gin.Context, cookieKey string) interface{} {
 	redisKey, _ := c.Cookie(cookieKey)
-	log.Println("redisKeyは")
-	log.Println(redisKey)
 	redisValue, err := conn.Get(c, redisKey).Result()
-	log.Println("redisValueは")
-	log.Println(redisValue)
 	switch {
 	case err == redis.Nil:
 		fmt.Println("SessionKeyが登録されていません")
@@ -51,13 +43,11 @@ func GetSession(c *gin.Context, cookieKey string) interface{} {
 	case err != nil:
 		fmt.Println("Session取得時にエラー発生:" + err.Error())
 	}
-	log.Println("redisと接続されました")
 	return redisValue
 }
 
 func DeleteSession(c *gin.Context, cookieKey string) {
 	redisId, _ := c.Cookie(cookieKey)
-	log.Println("redisと接続されました")
 	conn.Del(c, redisId)
 	c.SetCookie(cookieKey, "", -1, "/", "localhost", false, false)
 }
