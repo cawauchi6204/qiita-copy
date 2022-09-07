@@ -1,9 +1,11 @@
 import Link from "next/link"
 import { Mail, Bell, User } from 'react-feather'
 
-type Props = {}
+type Props = {
+  showNavBars?: boolean
+}
 
-const Header: React.FC<Props> = ({ }) => {
+const Header: React.FC<Props> = ({ showNavBars = true }) => {
   return (
     <header className="py-2 font-bold" style={{ "backgroundColor": "#2F3232" }}>
       <div className=" flex flex-col mx-8">
@@ -22,71 +24,73 @@ const Header: React.FC<Props> = ({ }) => {
             <button className="bg-green-500 text-white ml-4">投稿する</button>
           </div>
         </div>
-        <ul className="flex text-gray-400 gap-6 mt-2">
-          <li>
-            <Link href="/">
-              <a className="hover:text-white">
-                ホーム
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/timeline">
-              <a className="hover:text-white">
-                タイムライン
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/trend">
-              <a className="hover:text-white">
-                トレンド
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/question">
-              <a className="hover:text-white">
-                質問
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/official-events">
-              <a className="hover:text-white">
-                公式イベント
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href="">
-              <a className="hover:text-white">
-                公式コラム
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/official-columns">
-              <a className="hover:text-white">
-                募集
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/organizations">
-              <a className="hover:text-white">
-                Organization
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/">
-              <a className="hover:text-white">
-                Qiita Blog
-              </a>
-            </Link>
-          </li>
-        </ul>
+        {showNavBars && (
+          <ul className="flex text-gray-400 gap-6 mt-2">
+            <li>
+              <Link href="/">
+                <a className="hover:text-white">
+                  ホーム
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/timeline">
+                <a className="hover:text-white">
+                  タイムライン
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/trend">
+                <a className="hover:text-white">
+                  トレンド
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/question">
+                <a className="hover:text-white">
+                  質問
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/official-events">
+                <a className="hover:text-white">
+                  公式イベント
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="">
+                <a className="hover:text-white">
+                  公式コラム
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/official-columns">
+                <a className="hover:text-white">
+                  募集
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/organizations">
+                <a className="hover:text-white">
+                  Organization
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/">
+                <a className="hover:text-white">
+                  Qiita Blog
+                </a>
+              </Link>
+            </li>
+          </ul>
+        )}
       </div>
     </header>
   )
