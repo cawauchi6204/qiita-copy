@@ -45,6 +45,7 @@ func Router() {
 	// http://localhost：3000/get_cookie-by-frontでクッキーを削除することができ「ない」
 	r.GET("/set_cookie-by-front", func(c *gin.Context) {
 		// セット
+		c.SetSameSite(http.SameSiteNoneMode)
 		c.SetCookie("gin_cookie", "test", 3600, "/", "localhost", false, true)
 
 		c.String(http.StatusOK, "Set cookie")
@@ -59,6 +60,7 @@ func Router() {
 			return
 		}
 		r.GET("/delete_cookie-by-front", func(c *gin.Context) {
+			c.SetSameSite(http.SameSiteNoneMode)
 			c.SetCookie("gin_cookie", "", -1, "/", "localhost", false, false)
 		})
 

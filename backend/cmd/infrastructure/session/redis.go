@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"io"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
@@ -30,10 +31,12 @@ func NewSession(c *gin.Context, cookieKey, redisValue string) {
 	if err := conn.Set(c, newRedisKey, redisValue, 0).Err(); err != nil {
 		panic("Session登録時にエラーが発生:" + err.Error())
 	}
+	c.SetSameSite(http.SameSiteNoneMode)
 	c.SetCookie(cookieKey, newRedisKey, 0, "/", "localhost", false, false)
 }
 
 func GetSession(c *gin.Context, cookieKey string) interface{} {
+	c.SetSameSite(http.SameSiteNoneMode)
 	redisKey, _ := c.Cookie(cookieKey)
 	redisValue, err := conn.Get(c, redisKey).Result()
 	switch {
@@ -49,5 +52,6 @@ func GetSession(c *gin.Context, cookieKey string) interface{} {
 func DeleteSession(c *gin.Context, cookieKey string) {
 	redisId, _ := c.Cookie(cookieKey)
 	conn.Del(c, redisId)
+	c.SetSameSite(http.SameSiteNoneMode)
 	c.SetCookie(cookieKey, "", -1, "/", "localhost", false, false)
 }
