@@ -1,23 +1,17 @@
 package middleware
 
 import (
-	"encoding/json"
+	"log"
 	"net/http"
 	"time"
 
-	"github.com/cawauchi6204/qiita-copy/cmd/infrastructure/repository"
+	"github.com/cawauchi6204/qiita-copy/cmd/infrastructure/session"
 	"github.com/gin-contrib/cors"
-	"github.com/gin-contrib/sessions"
-	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
-	"github.com/koron/go-dproxy"
 )
 
 func Middleware() (r *gin.Engine) {
 	r = gin.Default()
-	// session設定
-	store := cookie.NewStore([]byte("secret"))
-	r.Use(sessions.Sessions("mysession", store))
 
 	// cors設定
 	r.Use(cors.New(cors.Config{
@@ -52,21 +46,27 @@ func Middleware() (r *gin.Engine) {
 
 func LoginCheckMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		session := sessions.Default(c)
-		loginUserJson, err := dproxy.New(session.Get("password")).String()
-		if err != nil {
-			c.Status(402) // 下の分岐で返されるエラーステータスが400のため、一時的にわかりやすいように402にしている
+		cookieKey := "loginUserIdKey"
+		id := session.GetSession(c, cookieKey)
+		if id == nil {
+			c.Redirect(http.StatusFound, "/login")
 			c.Abort()
 		} else {
-			var loginInfo repository.User
-			// Json文字列のアンマーシャル
-			err := json.Unmarshal([]byte(loginUserJson), &loginInfo)
-			if err != nil {
-				c.Status(http.StatusUnauthorized)
-				c.Abort()
-			} else {
-				c.Next()
-			}
+			c.Next()
+			log.Println("通ったわ！！！")
+		}
+	}
+}
+
+func LogoutCheckMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		cookieKey := "loginUserIdKey"
+		id := session.GetSession(c, cookieKey)
+		if id != nil {
+			c.Redirect(http.StatusFound, "/")
+			c.Abort()
+		} else {
+			c.Next()
 		}
 	}
 }

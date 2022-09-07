@@ -1,6 +1,8 @@
 package presentation
 
 import (
+	"fmt"
+	"net/http"
 	"os"
 	"strconv"
 
@@ -12,6 +14,56 @@ import (
 
 func Router() {
 	r := middleware.Middleware()
+
+	// http://localhost/set_cookieでクッキーをセットし、
+	// http://localhost/get_cookieでクッキーを取得し、
+	// http://localhost/get_cookieでクッキーを削除することができる
+	r.GET("/set_cookie", func(c *gin.Context) {
+		// セット
+		c.SetCookie("gin_cookie", "test", 3600, "/", "localhost", false, true)
+
+		c.String(http.StatusOK, "Set cookie")
+	})
+
+	r.GET("/get_cookie", func(c *gin.Context) {
+		// 取得
+		cookie, err := c.Cookie("gin_cookie")
+
+		if err != nil {
+			c.String(http.StatusOK, "Failed to get cookie")
+			return
+		}
+		r.GET("/delete_cookie", func(c *gin.Context) {
+			c.SetCookie("gin_cookie", "", -1, "/", "localhost", false, false)
+		})
+
+		c.String(http.StatusOK, fmt.Sprintf("Cookie value: %s \n", cookie))
+	})
+
+	// http://localhost：3000/set_cookie-by-frontでクッキーをセットし、
+	// http://localhost：3000/get_cookie-by-frontでクッキーを取得し、
+	// http://localhost：3000/get_cookie-by-frontでクッキーを削除することができ「ない」
+	r.GET("/set_cookie-by-front", func(c *gin.Context) {
+		// セット
+		c.SetCookie("gin_cookie", "test", 3600, "/", "localhost", false, true)
+
+		c.String(http.StatusOK, "Set cookie")
+	})
+
+	r.GET("/get_cookie-by-front", func(c *gin.Context) {
+		// 取得
+		cookie, err := c.Cookie("gin_cookie")
+
+		if err != nil {
+			c.String(http.StatusOK, "Failed to get cookie")
+			return
+		}
+		r.GET("/delete_cookie-by-front", func(c *gin.Context) {
+			c.SetCookie("gin_cookie", "", -1, "/", "localhost", false, false)
+		})
+
+		c.String(http.StatusOK, fmt.Sprintf("Cookie value: %s \n", cookie))
+	})
 	r.POST("/login", func(c *gin.Context) {
 		coordinator.Login(c)
 		c.JSON(200, "成功したかも")

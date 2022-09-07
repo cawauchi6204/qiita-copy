@@ -4,6 +4,7 @@ services:
     build: ./backend
     depends_on:
       - db
+      - redis
     volumes:
       - ./backend:/go/src/app
     tty: true
@@ -43,6 +44,10 @@ services:
       - "80:80"
     depends_on:
       - app
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
 volumes:
   db_volume:
     driver: local
