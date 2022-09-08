@@ -19,10 +19,10 @@ func GetUserById(userId int) (user repository.User) {
 	return
 }
 
-func createUser(name, email, password string) {
+func createUser(id, email, password string) {
 	// TODO: これはEntityに持たせたい
 	u := repository.User{
-		Name:           name,
+		ID:             id,
 		Email:          email,
 		Password:       password,
 		Nickname:       "",
@@ -37,7 +37,7 @@ func createUser(name, email, password string) {
 	repository.CreateUser(u)
 }
 
-func Signup(name, email, password string) (*repository.User, error) {
+func Signup(id, email, password string) (*repository.User, error) {
 	user := repository.User{}
 	repository.FindUserByEmail(email)
 	if user.ID != "" {
@@ -51,7 +51,7 @@ func Signup(name, email, password string) (*repository.User, error) {
 		fmt.Println("パスワード暗号化中にエラーが発生しました。：", err)
 		return nil, err
 	}
-	createUser(name, email, encryptPw)
+	createUser(id, email, encryptPw)
 	return &user, nil
 }
 
