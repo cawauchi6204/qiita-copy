@@ -8,7 +8,7 @@ CREATE TABLE
     hp_url VARCHAR(100) NOT NULL,
     location VARCHAR(50) NOT NULL,
     github_account VARCHAR(100) NOT NULL,
-    organization_id INTEGER,
+    organization_id VARCHAR(50),
     is_deleted BOOLEAN NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
   );

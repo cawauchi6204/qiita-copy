@@ -25,12 +25,11 @@ func createUser(id, email, password string) {
 		ID:             id,
 		Email:          email,
 		Password:       password,
-		Nickname:       "",
 		Description:    "",
 		HpUrl:          "",
 		Location:       "",
 		GithubAccount:  "",
-		OrganizationId: 0,
+		OrganizationId: "",
 		IsDeleted:      0,
 		CreatedAt:      time.Now(),
 	}

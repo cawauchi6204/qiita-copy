@@ -7,8 +7,8 @@ import (
 
 type Like struct {
 	ID          uint      `gorm:"primaryKey" json:"id"`
-	LikeUserId  int       `json:"like_user_id"`
-	LikedUserId int       `json:like_user_id`
+	LikeUserId  string    `json:"like_user_id"`
+	LikedUserId string    `json:like_user_id`
 	CreatedAt   time.Time `json:"createdAt"`
 }
 

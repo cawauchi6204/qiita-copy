@@ -18,8 +18,7 @@ func Router() {
 	})
 	r.GET("/users/:userId/posts", func(c *gin.Context) {
 		userId := c.Param("userId")
-		i, _ := strconv.Atoi(userId)
-		posts := service.GetAllPostsByUserId(i)
+		posts := service.GetAllPostsByUserId(userId)
 		c.JSON(200, posts)
 	})
 	r.GET("/user/:id", func(c *gin.Context) {
