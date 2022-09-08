@@ -24,3 +24,12 @@ func FindPostsAll() {
 		fmt.Println(err)
 	}
 }
+
+func FindPostsAllByUserId(userId int) (posts []Post) {
+	posts = []Post{}
+	posts = []Post{}
+	if err := DB.Find(&posts, "posted_by = ?", userId).Error; err != nil {
+		fmt.Println(err)
+	}
+	return
+}
