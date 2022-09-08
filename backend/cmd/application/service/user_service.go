@@ -40,7 +40,7 @@ func createUser(name, email, password string) {
 func Signup(name, email, password string) (*repository.User, error) {
 	user := repository.User{}
 	repository.FindUserByEmail(email)
-	if user.ID != 0 {
+	if user.ID != "" {
 		err := errors.New("同一名のメールアドレスが既に登録されています。")
 		fmt.Println(err)
 		return nil, err
@@ -57,7 +57,7 @@ func Signup(name, email, password string) (*repository.User, error) {
 
 func Login(email, password string) (*repository.User, error) {
 	user := repository.FindUserByEmail(email)
-	if user.ID == 0 {
+	if user.ID == "" {
 		err := errors.New("メールアドレスが一致するユーザーが存在しません")
 		fmt.Println(err)
 		return nil, err

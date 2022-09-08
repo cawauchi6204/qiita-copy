@@ -6,7 +6,7 @@ import (
 )
 
 type Post struct {
-	ID             uint      `gorm:"primaryKey" json:"id"`
+	ID             string    `json:"id"`
 	Title          string    `json:"title"`
 	Body           string    `json:"body"`
 	PostedBy       int       `json:"posted_by"`
@@ -26,10 +26,70 @@ func FindPostsAll() {
 }
 
 func FindPostsAllByUserId(userId int) (posts []Post) {
-	posts = []Post{}
-	posts = []Post{}
-	if err := DB.Find(&posts, "posted_by = ?", userId).Error; err != nil {
-		fmt.Println(err)
+	posts = []Post{
+		{
+			ID:             "ID1",
+			Title:          "Title1",
+			Body:           "Body1",
+			PostedBy:       1,
+			OrganizationId: 1,
+			IsDeleted:      0,
+			CreatedAt:      time.Now(),
+			UpdatedAt:      time.Now(),
+		},
+		{
+			ID:             "ID2",
+			Title:          "Title2",
+			Body:           "Body2",
+			PostedBy:       1,
+			OrganizationId: 1,
+			IsDeleted:      0,
+			CreatedAt:      time.Now(),
+			UpdatedAt:      time.Now(),
+		},
+		{
+			ID:             "ID3",
+			Title:          "Title3",
+			Body:           "Body3",
+			PostedBy:       1,
+			OrganizationId: 1,
+			IsDeleted:      0,
+			CreatedAt:      time.Now(),
+			UpdatedAt:      time.Now(),
+		},
+		{
+			ID:             "ID4",
+			Title:          "Title4",
+			Body:           "Body4",
+			PostedBy:       1,
+			OrganizationId: 1,
+			IsDeleted:      0,
+			CreatedAt:      time.Now(),
+			UpdatedAt:      time.Now(),
+		},
+		{
+			ID:             "ID5",
+			Title:          "Title5",
+			Body:           "Body5",
+			PostedBy:       1,
+			OrganizationId: 1,
+			IsDeleted:      0,
+			CreatedAt:      time.Now(),
+			UpdatedAt:      time.Now(),
+		},
+		{
+			ID:             "ID6",
+			Title:          "Title6",
+			Body:           "Body6",
+			PostedBy:       1,
+			OrganizationId: 1,
+			IsDeleted:      0,
+			CreatedAt:      time.Now(),
+			UpdatedAt:      time.Now(),
+		},
 	}
+	// if err := DB.Find(&posts, "posted_by = ?", userId).Error; err != nil {
+	// 	fmt.Println(err)
+	// }
 	return
 }
