@@ -8,5 +8,6 @@ CREATE TABLE
     hp_url VARCHAR(100) NOT NULL,
     location VARCHAR(50) NOT NULL,
     is_deleted BOOLEAN NOT NULL,
+    is_draft BOOLEAN NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
   );

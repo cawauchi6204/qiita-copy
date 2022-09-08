@@ -3,7 +3,7 @@ CREATE TABLE
     id TEXT,
     title VARCHAR (50) NOT NULL,
     body TEXT NOT NULL,
-    posted_by INTEGER NOT NULL,
+    posted_by VARCHAR(50) NOT NULL,
     organization_id INTEGER,
     is_draft BOOLEAN NOT NULL,
     is_deleted BOOLEAN NOT NULL,
