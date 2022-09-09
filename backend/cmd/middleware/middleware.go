@@ -1,14 +1,18 @@
 package middleware
 
 import (
+	"net/http"
 	"time"
 
+	"github.com/cawauchi6204/qiita-copy/cmd/infrastructure/session"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func Middleware() (r *gin.Engine) {
 	r = gin.Default()
+
+	// cors設定
 	r.Use(cors.New(cors.Config{
 		// アクセスを許可したいアクセス元
 		AllowOrigins: []string{
@@ -37,4 +41,30 @@ func Middleware() (r *gin.Engine) {
 		MaxAge: 24 * time.Hour,
 	}))
 	return
+}
+
+func LoginCheckMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		cookieKey := "loginUserIdKey"
+		id := session.GetSession(c, cookieKey)
+		if id == nil {
+			c.Redirect(http.StatusFound, "/login")
+			c.Abort()
+		} else {
+			c.Next()
+		}
+	}
+}
+
+func LogoutCheckMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		cookieKey := "loginUserIdKey"
+		id := session.GetSession(c, cookieKey)
+		if id != nil {
+			c.Redirect(http.StatusFound, "/")
+			c.Abort()
+		} else {
+			c.Next()
+		}
+	}
 }

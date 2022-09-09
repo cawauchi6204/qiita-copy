@@ -8,7 +8,7 @@ import (
 )
 
 func dbConnect() *gorm.DB {
-	dsn := "user:password@tcp(db:3306)/test_db"
+	dsn := "user:password@tcp(db:3306)/test_db?parseTime=true"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err)

@@ -2,7 +2,10 @@ package repository
 
 import (
 	"fmt"
+	"log"
 	"time"
+
+	"gorm.io/gorm"
 )
 
 type User struct {
@@ -39,15 +42,16 @@ func FindUserById(userId int) (user User) {
 
 func FindUserByEmail(email string) (user User) {
 	user = User{}
-	if err := DB.First(&user, email).Error; err != nil {
+	if err := DB.First(&user, "email = ?", email).Error; err != nil {
 		fmt.Println(err)
 	}
 	return
 }
 
-func CreateUser(user User) error {
-	if err := DB.Create(&user).Error; err != nil {
-		return err
+func CreateUser(user User) (result *gorm.DB) {
+	result = DB.Create(&user)
+	if result.Error != nil {
+		log.Fatal(result.Error)
 	}
-	return nil
+	return
 }
