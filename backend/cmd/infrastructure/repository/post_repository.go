@@ -18,11 +18,12 @@ type Post struct {
 
 // TODO: 今は特化関数だがBuilderパターンにしてuseCase層でimportしてビジネスロジック関数を組み立てたい
 
-func FindPostsAll() {
-	posts := []Post{}
-	if err := DB.Find(&posts).Error; err != nil {
+func FindPostsAll() (posts []Post) {
+	posts = []Post{}
+	if err := DB.Find(&posts, "is_deleted = ?", 0).Error; err != nil {
 		fmt.Println(err)
 	}
+	return
 }
 
 func FindPostsAllByUserId(userId string) (posts []Post) {

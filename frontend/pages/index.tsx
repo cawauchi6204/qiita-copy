@@ -1,25 +1,9 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import Layout from "../components/Layout"
 import CardList from "../components/CardList"
 import Ranking from "../components/Ranking"
-
-const dummyCards = [
-  {
-    id: "hogehoge",
-    title: "title1",
-    createdAt: "1月"
-  },
-  {
-    id: "fugafuga",
-    title: "title2",
-    createdAt: "2月"
-  },
-  {
-    id: "piyopiyo",
-    title: "title3",
-    createdAt: "3月"
-  },
-]
+import axios from 'axios'
+import { Post } from '../types/Post'
 
 const dummyRanking = [
   {
@@ -49,7 +33,11 @@ const dummyRanking = [
   },
 ]
 
-const Home: NextPage = () => {
+type Props = {
+  posts: Post[]
+}
+
+const Home: NextPage<Props> = ({ posts }) => {
   return (
     <Layout>
       <div className="flex gap-8">
@@ -57,7 +45,7 @@ const Home: NextPage = () => {
           <Ranking rankingTitle="タグランキング" rankingUnit="users" contents={dummyRanking} />
         </div>
         <div className="w-2/3">
-          <CardList posts={dummyCards} />
+          <CardList posts={posts} />
         </div>
         <div className="w-1/6">
           <Ranking rankingTitle="タグランキング" rankingUnit="users" contents={dummyRanking} />
@@ -65,6 +53,11 @@ const Home: NextPage = () => {
       </div>
     </Layout>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const res = await axios.get(`http://localhost/posts`)
+  return { props: { posts: res.data } }
 }
 
 export default Home

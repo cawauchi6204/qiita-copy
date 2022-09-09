@@ -12,6 +12,10 @@ import (
 
 func Router() {
 	r := middleware.Middleware()
+	r.GET("/posts", func(c *gin.Context) {
+		posts := service.GetAllPosts()
+		c.JSON(200, posts)
+	})
 	r.GET("/users", func(c *gin.Context) {
 		users := service.GetAllUsers()
 		c.JSON(200, users)
