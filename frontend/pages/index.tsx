@@ -38,16 +38,13 @@ type Props = {
 }
 
 const setCookie = async () => {
-  await axios.get('http://localhost/set_cookie-by-front'),
-    { withCredentials: true }
+  await axios.get('/api/set_cookie-by-front')
 }
 const getCookie = async () => {
-  await axios.get('http://localhost/get_cookie-by-front'),
-    { withCredentials: true }
+  await axios.get('/api/get_cookie-by-front')
 }
 const deleteCookie = async () => {
-  await axios.get('http://localhost/delete_cookie-by-front'),
-    { withCredentials: true }
+  await axios.get('/api/delete_cookie-by-front')
 }
 
 const Home: NextPage<Props> = ({ posts }) => {
