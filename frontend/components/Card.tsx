@@ -1,9 +1,8 @@
 import Link from "next/link"
 import { User, Pocket, Heart, Tag } from "react-feather"
+import { Post } from "../types/Post"
 
-type Props = {}
-
-const Card: React.FC<Props> = ({ }) => {
+const Card: React.FC<Pick<Post, "id" | "title" | "createdAt">> = ({ id, title, createdAt }) => {
   return (
     <div className="w-full bg-white flex flex-col p-4">
       <div className="flex">
@@ -11,18 +10,18 @@ const Card: React.FC<Props> = ({ }) => {
         <div className="flex flex-col">
           <Link href="">
             <a>
-              @hogehoge(Hoge Taro)
+              {id}
             </a>
           </Link>
           <time className="text-xs text-gray">
-            2022年09月06日
+            {createdAt}
           </time>
         </div>
       </div>
       <div className="flex flex-col ml-10">
         <Link href="">
           <a className="text-2xl mt-2 font-bold hover:underline">
-            初学者が覚えたいチーム開発でのGit操作
+            {title}
           </a>
         </Link>
       </div>
