@@ -1,6 +1,6 @@
 CREATE TABLE
   IF NOT EXISTS organizations(
-    id serial PRIMARY KEY,
+    id VARCHAR (50) NOT NULL,
     name VARCHAR (50) NOT NULL,
     password VARCHAR (300) NOT NULL,
     email VARCHAR (300) UNIQUE NOT NULL,
@@ -8,5 +8,6 @@ CREATE TABLE
     hp_url VARCHAR(100) NOT NULL,
     location VARCHAR(50) NOT NULL,
     is_deleted BOOLEAN NOT NULL,
+    is_draft BOOLEAN NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
   );

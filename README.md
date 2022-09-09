@@ -17,12 +17,11 @@
 - name string
 - email string
 - password string
-- nickname string
 - description string
 - hp_url string
 - location string
 - github_account string
-- organization_id int
+- organization_id string
 - is_deleted boolean
 - created_at timestamp
 
@@ -40,7 +39,7 @@
 - title string
 - body string
 - posted_by int(relation user_id)
-- organization_id int
+- organization_id string
 - created_at timestamp
 - updated_at timestamp
 - is_draft boolean

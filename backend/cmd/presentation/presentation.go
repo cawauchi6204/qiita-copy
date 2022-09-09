@@ -74,9 +74,18 @@ func Router() {
 		coordinator.Logout(c)
 		c.JSON(200, "成功したかも")
 	})
+	r.GET("/posts", func(c *gin.Context) {
+		posts := service.GetAllPosts()
+		c.JSON(200, posts)
+	})
 	r.GET("/users", func(c *gin.Context) {
 		users := service.GetAllUsers()
 		c.JSON(200, users)
+	})
+	r.GET("/users/:userId/posts", func(c *gin.Context) {
+		userId := c.Param("userId")
+		posts := service.GetAllPostsByUserId(userId)
+		c.JSON(200, posts)
 	})
 	r.GET("/user/:id", func(c *gin.Context) {
 		userId := c.Param("id")

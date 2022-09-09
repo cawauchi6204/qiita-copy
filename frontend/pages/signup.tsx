@@ -4,7 +4,7 @@ import Layout from "../components/Layout"
 
 // TODO: 要リファクタ(汚すぎる)
 const SignUp = ({ }) => {
-  const [name, setName] = useState("")
+  const [id, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const handleSubmit = async () => {

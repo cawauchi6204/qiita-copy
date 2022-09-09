@@ -1,14 +1,21 @@
 import Card from "./Card"
+import { Post } from "../types/Post"
 
-type Props = {}
+type Props = {
+  posts: Pick<Post, "id" | "title" | "createdAt">[]
+}
 
-const CardList: React.FC<Props> = ({ }) => {
+const CardList: React.FC<Props> = ({ posts }) => {
   return (
-    <div className="flex flex-col gap-4">
-      <Card />
-      <Card />
-      <Card />
-    </div>
+    < div className="flex flex-col gap-4" >
+      {
+        posts.map((post) => {
+          return (
+            <Card id={post.id} title={post.title} createdAt={post.createdAt} />
+          )
+        })
+      }
+    </div >
   )
 }
 
