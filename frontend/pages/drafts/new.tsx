@@ -1,9 +1,13 @@
 import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
+import { useRecoilValue } from 'recoil'
 import Header from '../../components/Header'
+import { userState } from '../../contexts/UserContext'
 
 const New: React.FC = ({ }) => {
   const [text, setText] = useState("")
+  const user = useRecoilValue(userState);
+  console.log('newの10行目のuserは' + JSON.stringify(user, null, 2))
   return (
     <div>
       <div className='flex flex-col gap-1'>

@@ -33,13 +33,13 @@ func NewSession(c *gin.Context, cookieKey, redisValue string) {
 	c.SetCookie(cookieKey, newRedisKey, 0, "/", "localhost", false, false)
 }
 
-func GetSession(c *gin.Context, cookieKey string) interface{} {
+func GetSession(c *gin.Context, cookieKey string) string {
 	redisKey, _ := c.Cookie(cookieKey)
 	redisValue, err := conn.Get(c, redisKey).Result()
 	switch {
 	case err == redis.Nil:
 		fmt.Println("SessionKeyが登録されていません")
-		return nil
+		return err.Error()
 	case err != nil:
 		fmt.Println("Session取得時にエラー発生:" + err.Error())
 	}

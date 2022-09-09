@@ -50,6 +50,10 @@ func Router() {
 		authUserGroup.GET("/mypage", func(c *gin.Context) {
 			c.JSON(200, "認証されています")
 		})
+		authUserGroup.GET("/myinfo", func(c *gin.Context) {
+			user := coordinator.GetMyInfo(c)
+			c.JSON(200, user)
+		})
 	}
 
 	deployPort := os.Getenv("PORT")
