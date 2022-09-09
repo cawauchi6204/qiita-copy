@@ -5,6 +5,7 @@ import (
 
 	"github.com/cawauchi6204/qiita-copy/cmd/application/service"
 	"github.com/cawauchi6204/qiita-copy/cmd/common/crypto"
+	"github.com/cawauchi6204/qiita-copy/cmd/infrastructure/repository"
 	"github.com/cawauchi6204/qiita-copy/cmd/infrastructure/session"
 	"github.com/cawauchi6204/qiita-copy/cmd/presentation/request"
 	"github.com/gin-gonic/gin"
@@ -33,9 +34,7 @@ func Login(c *gin.Context) {
 	if err != nil {
 		c.Status(http.StatusBadRequest)
 	} else {
-		// メールアドレスでDBからユーザ取得（詳細は割愛）
 		user := service.GetUserByEmail(request.Email)
-		// ハッシュ値でのパスワード比較
 		err = crypto.CompareHashAndPassword(user.Password, request.Password)
 		if err != nil {
 			c.Status(http.StatusBadRequest)
@@ -45,6 +44,13 @@ func Login(c *gin.Context) {
 			c.Redirect(http.StatusFound, "/")
 		}
 	}
+}
+
+func GetMyInfo(c *gin.Context) (user repository.User) {
+	cookieKey := "loginUserIdKey"
+	email := session.GetSession(c, cookieKey)
+	user = service.GetUserByEmail(email)
+	return
 }
 
 func Logout(c *gin.Context) {

@@ -47,7 +47,7 @@ func LoginCheckMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		cookieKey := "loginUserIdKey"
 		id := session.GetSession(c, cookieKey)
-		if id == nil {
+		if id == "" {
 			c.Redirect(http.StatusFound, "/login")
 			c.Abort()
 		} else {
@@ -60,7 +60,7 @@ func LogoutCheckMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		cookieKey := "loginUserIdKey"
 		id := session.GetSession(c, cookieKey)
-		if id != nil {
+		if id != "" {
 			c.Redirect(http.StatusFound, "/")
 			c.Abort()
 		} else {
