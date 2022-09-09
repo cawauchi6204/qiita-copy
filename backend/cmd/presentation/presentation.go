@@ -58,11 +58,11 @@ func Router() {
 			c.String(http.StatusOK, "Failed to get cookie")
 			return
 		}
-		r.GET("/delete_cookie-by-front", func(c *gin.Context) {
-			c.SetCookie("gin_cookie", "", -1, "/", "localhost", false, false)
-		})
-
 		c.String(http.StatusOK, fmt.Sprintf("Cookie value: %s \n", cookie))
+
+	})
+	r.GET("/delete_cookie-by-front", func(c *gin.Context) {
+		c.SetCookie("gin_cookie", "", -1, "/", "localhost", false, false)
 	})
 	r.POST("/login", func(c *gin.Context) {
 		coordinator.Login(c)

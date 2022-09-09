@@ -1,7 +1,7 @@
 package request
 
 type EmailSignUpRequest struct {
-	Name     string `json:"name" bson:"name"`
+	Id       string `json:"id" bson:"id"`
 	Email    string `json:"email" bson:"email"`
 	Password string `json:"password" bson:"password"`
 }

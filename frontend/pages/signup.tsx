@@ -4,36 +4,36 @@ import Layout from "../components/Layout"
 
 // TODO: 要リファクタ(汚すぎる)
 const SignUp = ({ }) => {
-  const [id, setName] = useState("")
+  const [id, setId] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const handleSubmit = async () => {
-    await axios.post('http://localhost/signup', {
-      name, email, password
+    await axios.post('/api/signup', {
+      id, email, password
     })
   }
   const getUser = async () => {
-    await axios.get('http://localhost/users')
+    await axios.get('/api/users')
   }
   const login = async () => {
-    await axios.post('http://localhost/login', {
+    await axios.post('/api/login', {
       email, password
     })
   }
   const logout = async () => {
-    await axios.post('http://localhost/logout')
+    await axios.post('/api/logout')
   }
   const mypage = async () => {
-    await axios.get('http://localhost/mypage')
+    await axios.get('/api/mypage')
   }
   const setCookie = async () => {
-    await axios.get('http://localhost/set_cookie-by-front')
+    await axios.get('/api/set_cookie-by-front')
   }
   const getCookie = async () => {
-    await axios.get('http://localhost/get_cookie-by-front')
+    await axios.get('/api/get_cookie-by-front')
   }
   const deleteCookie = async () => {
-    await axios.get('http://localhost/delete_cookie-by-front')
+    await axios.get('/api/delete_cookie-by-front')
   }
   return (
     <Layout>
@@ -42,7 +42,7 @@ const SignUp = ({ }) => {
       </h2>
       <p>新規登録(無料)して利用を開始しましょう。</p>
       <div>
-        <input className="w-full" type="text" placeholder="ユーザー名" onChange={(e) => setName(e.target.value)} /><br />
+        <input className="w-full" type="text" placeholder="ユーザー名" onChange={(e) => setId(e.target.value)} /><br />
         <input className="w-full" type="email" placeholder="メールアドレス" onChange={(e) => setEmail(e.target.value)} /><br />
         <input className="w-full" type="password" placeholder="パスワード" onChange={(e) => setPassword(e.target.value)} /><br />
         <input type="checkbox" />利用規約に同意する<br />

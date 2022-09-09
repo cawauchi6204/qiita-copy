@@ -22,10 +22,11 @@ func GetUserByEmail(email string) (user repository.User) {
 	return
 }
 
-func CreateUser(name, email, password string) (result *gorm.DB) {
+func CreateUser(id, email, password string) (result *gorm.DB) {
 	// TODO: これはEntityに持たせたい
 	u := repository.User{
-		ID:             name,
+		ID:             id,
+		Name:           "",
 		Email:          email,
 		Password:       password,
 		Description:    "",

@@ -1,7 +1,6 @@
 package coordinator
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/cawauchi6204/qiita-copy/cmd/application/service"
@@ -21,11 +20,7 @@ func SignUp(c *gin.Context) {
 		if err != nil {
 			c.Status(http.StatusBadRequest)
 		}
-		fmt.Println("signup()のrequest.email")
-		fmt.Println(request.Email)
-		fmt.Println("signup()のrequest.password")
-		fmt.Println(encryptedPassword)
-		service.CreateUser(request.Name, request.Email, encryptedPassword)
+		service.CreateUser(request.Id, request.Email, encryptedPassword)
 		cookieKey := "loginUserIdKey"
 		session.NewSession(c, cookieKey, request.Email)
 		c.Redirect(http.StatusFound, "/")
@@ -55,6 +50,5 @@ func Login(c *gin.Context) {
 func Logout(c *gin.Context) {
 	cookieKey := "loginUserIdKey"
 	session.DeleteSession(c, cookieKey)
-	fmt.Println("logoutされました")
 	c.Redirect(http.StatusFound, "/")
 }
