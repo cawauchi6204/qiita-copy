@@ -38,6 +38,14 @@ func FindPostsAllByUserId(userId string) (posts []Post) {
 	return
 }
 
+func FindPostByUserId(userId, postId string) (post Post) {
+	post = Post{}
+	if err := DB.Where("posted_by = ? AND id = ?", userId, postId).First(&post).Error; err != nil {
+		fmt.Println(err)
+	}
+	return
+}
+
 func CreatePost(post Post) (result *gorm.DB) {
 	result = DB.Create(&post)
 	if result.Error != nil {

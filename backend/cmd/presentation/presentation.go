@@ -29,10 +29,16 @@ func Router() {
 		users := service.GetAllUsers()
 		c.JSON(200, users)
 	})
-	r.GET("/users/:userId/posts", func(c *gin.Context) {
+	r.GET("/:userId/posts", func(c *gin.Context) {
 		userId := c.Param("userId")
 		posts := service.GetAllPostsByUserId(userId)
 		c.JSON(200, posts)
+	})
+	r.GET("/:userId/items/:postId", func(c *gin.Context) {
+		userId := c.Param("userId")
+		postId := c.Param("postId")
+		post := service.GetPostByUserId(userId, postId)
+		c.JSON(200, post)
 	})
 	r.GET("/user/:id", func(c *gin.Context) {
 		userId := c.Param("id")

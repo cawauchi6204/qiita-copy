@@ -26,15 +26,6 @@ const SignUp = ({ }) => {
   const mypage = async () => {
     await axios.get('/api/mypage')
   }
-  const setCookie = async () => {
-    await axios.get('/api/set_cookie-by-front')
-  }
-  const getCookie = async () => {
-    await axios.get('/api/get_cookie-by-front')
-  }
-  const deleteCookie = async () => {
-    await axios.get('/api/delete_cookie-by-front')
-  }
   return (
     <Layout>
       <h2>
@@ -52,9 +43,6 @@ const SignUp = ({ }) => {
         <button onClick={() => login()} className="bg-blue-600 hover:bg-red-500 text-white rounded px-4 py-2">ログイン</button>
         <button onClick={() => logout()} className="bg-blue-600 hover:bg-red-500 text-white rounded px-4 py-2">ログアウト</button>
         <button onClick={() => mypage()} className="bg-blue-600 hover:bg-red-500 text-white rounded px-4 py-2">認証</button>
-        <button onClick={() => setCookie()} className="bg-blue-600 hover:bg-red-500 text-white rounded px-4 py-2">クッキーを設定する</button>
-        <button onClick={() => getCookie()} className="bg-blue-600 hover:bg-red-500 text-white rounded px-4 py-2">クッキーを取得する</button>
-        <button onClick={() => deleteCookie()} className="bg-blue-600 hover:bg-red-500 text-white rounded px-4 py-2">クッキーを削除する</button>
       </div>
     </Layout>
   )
