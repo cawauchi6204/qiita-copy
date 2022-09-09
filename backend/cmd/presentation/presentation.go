@@ -54,6 +54,9 @@ func Router() {
 			user := coordinator.GetMyInfo(c)
 			c.JSON(200, user)
 		})
+		authUserGroup.POST("/post", func(c *gin.Context) {
+			service.CreatePost(c)
+		})
 	}
 
 	deployPort := os.Getenv("PORT")

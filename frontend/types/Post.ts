@@ -5,6 +5,7 @@ export type Post = {
 	postedBy: string
 	organizationId: string
 	isDeleted: number
+  isDraft: number
 	createdAt: string
 	updatedAt: string
 }
