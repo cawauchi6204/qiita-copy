@@ -16,7 +16,7 @@ const Header: React.FC<Props> = ({ showNavBars = true }) => {
             </a>
           </Link>
           <div>
-            <a className="text-white mr-4" href="">ベータ版フィードバック</a>
+            <a className="text-white text-xs mr-4" href="">ベータ版フィードバック</a>
             <input className="w-72 h-10 text-xs p-2 font-normal" type="text" placeholder="記事を検索" />
             <Mail className="inline ml-4" color="white" size={24} />
             <Bell className="inline ml-4" color="white" size={24} />
@@ -25,7 +25,7 @@ const Header: React.FC<Props> = ({ showNavBars = true }) => {
           </div>
         </div>
         {showNavBars && (
-          <ul className="flex text-gray-400 gap-6 mt-2">
+          <ul className="flex text-gray-400 text-xs gap-6 mt-2">
             <li>
               <Link href="/">
                 <a className="hover:text-white">

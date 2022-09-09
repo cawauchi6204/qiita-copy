@@ -2,6 +2,7 @@ import axios from "axios"
 import { GetServerSideProps } from "next"
 import CardList from "../../components/CardList"
 import Layout from "../../components/Layout"
+import UserProfile from "../../components/UserProfile"
 import { Post } from "../../types/Post"
 
 type Props = {
@@ -11,7 +12,16 @@ type Props = {
 const PostId: React.FC<Props> = ({ posts }) => {
   return (
     <Layout>
-      <CardList posts={posts} />
+      <div className="max-w-5xl m-auto">
+        <div className="flex gap-4">
+          <div className="w-1/3">
+            <UserProfile />
+          </div>
+          <div className="w-2/3">
+            <CardList posts={posts} />
+          </div>
+        </div>
+      </div>
     </Layout>
   )
 }
