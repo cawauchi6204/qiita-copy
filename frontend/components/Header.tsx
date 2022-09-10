@@ -10,7 +10,7 @@ const Header: React.FC<Props> = ({ showNavBars = true }) => {
     <header className="py-2 font-bold" style={{ "backgroundColor": "#2F3232" }}>
       <div className=" flex flex-col mx-8">
         <div className="flex justify-between">
-          <Link href="" >
+          <Link href="/" >
             <a className="text-green-500 font-normal text-4xl">
               Qiita
             </a>

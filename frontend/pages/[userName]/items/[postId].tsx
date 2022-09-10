@@ -6,10 +6,10 @@ import ReactMarkdown from 'react-markdown'
 
 import Icon from "../../../components/Icon"
 import Layout from "../../../components/Layout"
-import { PostResponse } from "../../../types/Post"
+import { Post } from "../../../types/Post"
 
 type Props = {
-  post: PostResponse
+  post: Post
 }
 
 const postId: React.FC<Props> = ({ post }) => {
@@ -27,7 +27,7 @@ const postId: React.FC<Props> = ({ post }) => {
           <div className="w-full bg-white p-8">
             <div className="flex gap-2">
               <Icon width={20} height={20} />
-              <span>{post.posted_by}</span>
+              <span>{post.postedBy}</span>
             </div>
             <h1 className="text-3xl font-bold">{post.title}</h1>
             <ReactMarkdown className="mt-12" children={post.body} />
@@ -47,6 +47,6 @@ export default postId
 export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!context.params) return { props: {} }
   const { userName, postId } = context.params
-  const res = await axios.get<PostResponse>(`http://localhost/${userName}/items/${postId}`)
+  const res = await axios.get<Post>(`http://localhost/${userName}/items/${postId}`)
   return { props: { post: res.data } }
 }

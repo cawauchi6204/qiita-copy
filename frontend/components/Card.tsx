@@ -2,15 +2,15 @@ import Link from "next/link"
 import { User, Pocket, Heart, Tag } from "react-feather"
 import { Post } from "../types/Post"
 
-const Card: React.FC<Pick<Post, "id" | "title" | "createdAt">> = ({ id, title, createdAt }) => {
+const Card: React.FC<Pick<Post, "id" | "title" | "postedBy" | "createdAt">> = ({ id, title, postedBy, createdAt }) => {
   return (
     <div className="w-full bg-white flex flex-col p-4">
       <div className="flex">
         <User size={40} />
         <div className="flex flex-col">
-          <Link href="">
+          <Link href={`/${postedBy}`}>
             <a>
-              {id}
+              {postedBy}
             </a>
           </Link>
           <time className="text-xs text-gray">
@@ -19,7 +19,7 @@ const Card: React.FC<Pick<Post, "id" | "title" | "createdAt">> = ({ id, title, c
         </div>
       </div>
       <div className="flex flex-col ml-10">
-        <Link href="">
+        <Link href={`/${postedBy}/items/${id}`}>
           <a className="text-2xl mt-2 font-bold hover:underline">
             {title}
           </a>
