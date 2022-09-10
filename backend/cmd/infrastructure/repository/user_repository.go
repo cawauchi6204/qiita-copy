@@ -32,9 +32,9 @@ func FindUsersAll() (users []User) {
 	return
 }
 
-func FindUserById(userId int) (user User) {
+func FindUserById(userId string) (user User) {
 	user = User{}
-	if err := DB.First(&user, userId).Error; err != nil {
+	if err := DB.First(&user, "id = ?", userId).Error; err != nil {
 		fmt.Println(err)
 	}
 	return

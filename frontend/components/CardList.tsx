@@ -6,7 +6,6 @@ type Props = {
 }
 
 const CardList: React.FC<Props> = ({ posts }) => {
-  console.log('CardListの9行目のpostsは' + JSON.stringify(posts, null, 2))
   return (
     < div className="flex flex-col gap-4" >
       {

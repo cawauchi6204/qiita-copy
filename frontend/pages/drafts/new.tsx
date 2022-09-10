@@ -9,14 +9,13 @@ const New: React.FC = ({ }) => {
   const [title, setTitle] = useState("")
   const [body, setBody] = useState("")
   const user = useRecoilValue(userState);
-  console.log('newの12行目のuserは' + JSON.stringify(user, null, 2))
   const handleSubmit = () => {
     axios.post("/api/post",
       {
         title,
         body,
         postedBy: user?.id,
-        organizationId: user?.organization_id,
+        organizationId: user?.organizationId,
         isDraft: 0,
         isDeleted: 0
       })

@@ -4,10 +4,10 @@ export type User = {
 	password: string
 	email: string
 	description: string
-	hp_url: string
+	hpUrl: string
 	location: string
-	github_account_id: string
-	organization_id: string
-	is_deleted: string
+	githubAccountId: string
+	organizationId: string
+	isDeleted: string
 	createdAt: string
 }
