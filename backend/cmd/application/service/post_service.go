@@ -22,6 +22,11 @@ func GetAllPostsByUserId(userId string) (posts []repository.Post) {
 	return
 }
 
+func GetPostByUserId(userId, postId string) (post repository.Post) {
+	post = repository.FindPostByUserId(userId, postId)
+	return
+}
+
 func CreatePost(c *gin.Context) (result *gorm.DB) {
 	var request request.CreatePostRequest
 	err := c.BindJSON(&request)

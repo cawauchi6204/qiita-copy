@@ -11,9 +11,9 @@ type Organization struct {
 	Email       string    `json:"email"`
 	Password    string    `json:"password"`
 	Description string    `json:"description"`
-	HpUrl       string    `json:"hp_url"`
+	HpUrl       string    `json:"hpUrl"`
 	Location    string    `json:"location"`
-	IsDeleted   bool      `json:"is_deleted"`
+	IsDeleted   bool      `json:"isDeleted"`
 	CreatedAt   time.Time `json:"createdAt"`
 	UpdatedAt   time.Time `json:"updatedAt"`
 }

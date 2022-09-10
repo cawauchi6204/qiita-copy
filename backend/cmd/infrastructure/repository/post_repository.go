@@ -12,10 +12,10 @@ type Post struct {
 	ID             string    `json:"id"`
 	Title          string    `json:"title"`
 	Body           string    `json:"body"`
-	PostedBy       string    `json:"posted_by"`
-	OrganizationId string    `json:"organization_id"`
-	IsDraft        int       `json:"is_draft"`
-	IsDeleted      int       `json:"is_deleted"`
+	PostedBy       string    `json:"postedBy"`
+	OrganizationId string    `json:"organizationId"`
+	IsDraft        int       `json:"isDraft"`
+	IsDeleted      int       `json:"isDeleted"`
 	CreatedAt      time.Time `json:"createdAt"`
 	UpdatedAt      time.Time `json:"updatedAt"`
 }
@@ -33,6 +33,14 @@ func FindPostsAll() (posts []Post) {
 func FindPostsAllByUserId(userId string) (posts []Post) {
 	posts = []Post{}
 	if err := DB.Find(&posts, "posted_by = ?", userId).Error; err != nil {
+		fmt.Println(err)
+	}
+	return
+}
+
+func FindPostByUserId(userId, postId string) (post Post) {
+	post = Post{}
+	if err := DB.Where("posted_by = ? AND id = ?", userId, postId).First(&post).Error; err != nil {
 		fmt.Println(err)
 	}
 	return

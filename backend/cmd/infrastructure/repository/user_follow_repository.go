@@ -7,8 +7,8 @@ import (
 
 type UserFollow struct {
 	ID             uint      `gorm:"primaryKey" json:"id"`
-	FollowUserId   string    `json:"follow_user_id"`
-	FollowedUserId string    `json:"followed_user_id"`
+	FollowUserId   string    `json:"followUserId"`
+	FollowedUserId string    `json:"followedUserId"`
 	CreatedAt      time.Time `json:"createdAt"`
 }
 
