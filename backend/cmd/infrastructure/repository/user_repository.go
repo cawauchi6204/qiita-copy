@@ -14,11 +14,11 @@ type User struct {
 	Password       string    `json:"password"`
 	Email          string    `json:"email"`
 	Description    string    `json:"description"`
-	HpUrl          string    `json:"hp_url"`
+	HpUrl          string    `json:"hpRrl"`
 	Location       string    `json:"location"`
-	GithubAccount  string    `json:"github_account_id"`
-	OrganizationId string    `json:"organization_id"`
-	IsDeleted      int       `json:"is_deleted"`
+	GithubAccount  string    `json:"githubAccountId"`
+	OrganizationId string    `json:"organizationId"`
+	IsDeleted      int       `json:"isDeleted"`
 	CreatedAt      time.Time `json:"createdAt"`
 }
 
