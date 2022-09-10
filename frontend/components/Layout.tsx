@@ -16,7 +16,7 @@ const Layout: React.FC<Props> = ({ title = "Qiita", children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="px-8 py-6">
+      <main className="px-8 py-6 max-w-7xl m-auto">
         {children}
       </main>
       <Footer />
