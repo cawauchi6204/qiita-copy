@@ -21,7 +21,9 @@ const Header: React.FC<Props> = ({ showNavBars = true }) => {
             <Mail className="inline ml-4" color="white" size={24} />
             <Bell className="inline ml-4" color="white" size={24} />
             <User className="inline ml-4" color="white" size={24} />
-            <button className="bg-green-500 text-white ml-4">投稿する</button>
+            <Link href="/drafts/new">
+              <button className="bg-green-500 text-white ml-4">投稿する</button>
+            </Link>
           </div>
         </div>
         {showNavBars && (

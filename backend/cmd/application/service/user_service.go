@@ -12,7 +12,7 @@ func GetAllUsers() (users []repository.User) {
 	return
 }
 
-func GetUserById(userId int) (user repository.User) {
+func GetUserById(userId string) (user repository.User) {
 	user = repository.FindUserById(userId)
 	return
 }

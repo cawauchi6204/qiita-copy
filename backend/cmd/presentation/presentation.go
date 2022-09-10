@@ -2,7 +2,6 @@ package presentation
 
 import (
 	"os"
-	"strconv"
 
 	"github.com/cawauchi6204/qiita-copy/cmd/application/coordinator"
 	"github.com/cawauchi6204/qiita-copy/cmd/application/service"
@@ -13,6 +12,10 @@ import (
 func Router() {
 	r := middleware.Middleware()
 
+	r.POST("/signup", func(c *gin.Context) {
+		coordinator.SignUp(c)
+		c.JSON(200, "成功したかも")
+	})
 	r.POST("/login", func(c *gin.Context) {
 		coordinator.Login(c)
 		c.JSON(200, "成功したかも")
@@ -29,6 +32,11 @@ func Router() {
 		users := service.GetAllUsers()
 		c.JSON(200, users)
 	})
+	r.GET("/:userId", func(c *gin.Context) {
+		userId := c.Param("userId")
+		user := service.GetUserById(userId)
+		c.JSON(200, user)
+	})
 	r.GET("/:userId/posts", func(c *gin.Context) {
 		userId := c.Param("userId")
 		posts := service.GetAllPostsByUserId(userId)
@@ -39,16 +47,6 @@ func Router() {
 		postId := c.Param("postId")
 		post := service.GetPostByUserId(userId, postId)
 		c.JSON(200, post)
-	})
-	r.GET("/user/:id", func(c *gin.Context) {
-		userId := c.Param("id")
-		i, _ := strconv.Atoi(userId)
-		user := service.GetUserById(i)
-		c.JSON(200, user)
-	})
-	r.POST("/signup", func(c *gin.Context) {
-		coordinator.SignUp(c)
-		c.JSON(200, "成功したかも")
 	})
 	authUserGroup := r.Group("/")
 	authUserGroup.Use(middleware.LoginCheckMiddleware())
