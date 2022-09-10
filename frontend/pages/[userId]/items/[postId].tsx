@@ -46,7 +46,7 @@ export default postId
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!context.params) return { props: {} }
-  const { userName, postId } = context.params
-  const res = await axios.get<Post>(`http://localhost/${userName}/items/${postId}`)
+  const { userId, postId } = context.params
+  const res = await axios.get<Post>(`http://localhost/user/${userId}/items/${postId}`)
   return { props: { post: res.data } }
 }

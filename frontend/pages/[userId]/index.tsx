@@ -32,10 +32,10 @@ const PostId: React.FC<Props> = ({ posts, user }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!context.params) return { props: {} }
   const { userId } = context.params;
-  const res = await axios.get(`http://localhost/${userId}/posts`)
-  const res2 = await axios.get(`http://localhost/${userId}`)
+  const posts = await axios.get(`http://localhost/user/${userId}/posts`)
+  const user = await axios.get(`http://localhost/user/${userId}`)
 
-  return { props: { posts: res.data, user: res2.data } }
+  return { props: { posts: posts.data, user: user.data } }
 }
 
 export default PostId
