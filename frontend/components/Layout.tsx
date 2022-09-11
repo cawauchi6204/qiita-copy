@@ -5,9 +5,10 @@ import Footer from "./Footer"
 type Props = {
   title?: string
   children: React.ReactNode
+  className?: string
 }
 
-const Layout: React.FC<Props> = ({ title = "Qiita", children }) => {
+const Layout: React.FC<Props> = ({ title = "Qiita", children, className }) => {
   return (
     <>
       <Head>
@@ -16,7 +17,7 @@ const Layout: React.FC<Props> = ({ title = "Qiita", children }) => {
         <link rel="icon" href="/tori.png" />
       </Head>
       <Header />
-      <main className="px-8 py-6 max-w-7xl m-auto">
+      <main className={`px-8 py-6 max-w-7xl m-auto ${className}`}>
         {children}
       </main>
       <Footer />

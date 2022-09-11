@@ -71,7 +71,7 @@ const Header: React.FC<Props> = ({ showNavBars = true }) => {
                   </MenuItem>
                 </a>
               </Link>
-              <Link href="/settings">
+              <Link href="/settings/profile">
                 <a>
                   <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
                     設定

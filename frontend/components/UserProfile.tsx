@@ -2,6 +2,7 @@ import Icon from "./Icon"
 import Button from "./Button"
 import { Hexagon, MapPin } from "react-feather"
 import { User } from "../types/User"
+import Link from "next/link"
 
 type Props = {
   user: User
@@ -25,7 +26,11 @@ const UserProfile: React.FC<Props> = ({ user }) => {
       </div>
       <p className="break-all">{user.description}</p>
       <div className="my-4">
-        <Button text="プロフィールを編集する" color="gray" />
+        <Link href="/settings/profile">
+          <a>
+            <Button color="gray">プロフィールを編集する</Button>
+          </a>
+        </Link>
       </div>
       <div>
         <Hexagon className="inline mr-2" color="gray" size={15} />
