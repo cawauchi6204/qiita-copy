@@ -10,15 +10,19 @@ const New: React.FC = ({ }) => {
   const [body, setBody] = useState("")
   const user = useRecoilValue(userState);
   const handleSubmit = () => {
-    axios.post("/api/post",
-      {
-        title,
-        body,
-        postedBy: user?.id,
-        organizationId: user?.organizationId,
-        isDraft: 0,
-        isDeleted: 0
-      })
+    try {
+      axios.post("/api/post",
+        {
+          title,
+          body,
+          postedBy: user?.id,
+          organizationId: user?.organizationId,
+          isDraft: 0,
+          isDeleted: 0
+        })
+    } catch (e) {
+      console.error(e)
+    }
   }
   return (
     <div>

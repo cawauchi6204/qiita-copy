@@ -28,7 +28,11 @@ const Profile: React.FC<Props> = ({ }) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (i) => {
     const data = { ...i, id: user.id }
-    await axios.put("/api/user", data)
+    try {
+      await axios.put("/api/user", data)
+    } catch (e) {
+      console.error(e)
+    }
   };
 
   return (
