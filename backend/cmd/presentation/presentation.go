@@ -61,6 +61,9 @@ func Router() {
 		authUserGroup.POST("/post", func(c *gin.Context) {
 			service.CreatePost(c)
 		})
+		authUserGroup.PUT("/user", func(c *gin.Context) {
+			service.UpdateUser(c)
+		})
 	}
 
 	deployPort := os.Getenv("PORT")

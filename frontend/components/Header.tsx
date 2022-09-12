@@ -4,14 +4,17 @@ import {
   Menu,
   MenuItem,
   MenuButton,
-  SubMenu
 } from '@szhsin/react-menu';
+import { useRecoilValue } from "recoil";
+import { userState } from "../contexts/UserContext";
 
 type Props = {
   showNavBars?: boolean
 }
 
 const Header: React.FC<Props> = ({ showNavBars = true }) => {
+  const user = useRecoilValue(userState);
+  console.log('Headerの17行目のuserは' + JSON.stringify(user, null, 2))
   return (
     <header className="py-2 font-bold" style={{ "backgroundColor": "#2F3232" }}>
       <div className=" flex flex-col mx-8">
@@ -24,64 +27,82 @@ const Header: React.FC<Props> = ({ showNavBars = true }) => {
           <div>
             <a className="text-white text-xs mr-4 hover:underline" href="">ベータ版フィードバック</a>
             <input className="w-72 h-10 text-xs p-2 font-normal" type="text" placeholder="記事を検索" />
-            <Menu className="inline" menuButton={<MenuButton><Mail className="inline ml-4" color="white" size={24} /></MenuButton>}>
-              <Link href="/mypage">
-                <a>
-                  <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
-                    hogehogeさんから連絡がありました
-                  </MenuItem>
-                </a>
-              </Link>
-            </Menu>
-            <Menu className="inline" menuButton={<MenuButton><Bell className="inline ml-4" color="white" size={24} /></MenuButton>}>
-            <Link href="/mypage">
-                <a>
-                  <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
-                    hogehogeさんからfollowされました
-                  </MenuItem>
-                </a>
-              </Link>
-            </Menu>
-            <Menu className="inline" menuButton={<MenuButton><User className="inline ml-4" color="white" size={24} /></MenuButton>}>
-              <Link href="/mypage">
-                <a>
-                  <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
-                    マイページ
-                  </MenuItem>
-                </a>
-              </Link>
-              <Link href="/stock">
-                <a>
-                  <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
-                    ストック
-                  </MenuItem>
-                </a>
-              </Link>
-              <Link href="/drafts/new">
-                <a>
-                  <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
-                    投稿
-                  </MenuItem>
-                </a>
-              </Link>
-              <Link href="/drafts">
-                <a>
-                  <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
-                    下書き
-                  </MenuItem>
-                </a>
-              </Link>
-              <Link href="/settings/profile">
-                <a>
-                  <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
-                    設定
-                  </MenuItem>
-                </a>
-              </Link>
-            </Menu>
-            <Link href="/drafts/new">
-              <button className="bg-green-500 text-white ml-4">投稿する</button>
-            </Link>
+            {user && user.id !== "" ? (
+              <>
+                <Menu className="inline" menuButton={<MenuButton><Mail className="inline ml-4" color="white" size={24} /></MenuButton>}>
+                  <Link href="/mypage">
+                    <a>
+                      <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
+                        hogehogeさんから連絡がありました
+                      </MenuItem>
+                    </a>
+                  </Link>
+                </Menu>
+                <Menu className="inline" menuButton={<MenuButton><Bell className="inline ml-4" color="white" size={24} /></MenuButton>}>
+                  <Link href="/mypage">
+                    <a>
+                      <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
+                        hogehogeさんからfollowされました
+                      </MenuItem>
+                    </a>
+                  </Link>
+                </Menu>
+                <Menu className="inline" menuButton={<MenuButton><User className="inline ml-4" color="white" size={24} /></MenuButton>}>
+                  <Link href="/mypage">
+                    <a>
+                      <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
+                        マイページ
+                      </MenuItem>
+                    </a>
+                  </Link>
+                  <Link href="/stock">
+                    <a>
+                      <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
+                        ストック
+                      </MenuItem>
+                    </a>
+                  </Link>
+                  <Link href="/drafts/new">
+                    <a>
+                      <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
+                        投稿
+                      </MenuItem>
+                    </a>
+                  </Link>
+                  <Link href="/drafts">
+                    <a>
+                      <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
+                        下書き
+                      </MenuItem>
+                    </a>
+                  </Link>
+                  <Link href="/settings/profile">
+                    <a>
+                      <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
+                        設定
+                      </MenuItem>
+                    </a>
+                  </Link>
+                </Menu>
+                <Link href="/drafts/new">
+                  <button className="bg-green-500 text-white ml-4">投稿する</button>
+                </Link>
+              </>
+            )
+              :
+              (
+                <>
+                  <Link href="/login">
+                    <a className="text-xs text-white ml-2">
+                      ログイン
+                    </a>
+                  </Link>
+                  <Link href="/signup">
+                    <button className=" text-xs border-white border-2 border-solid text-white p-2 ml-2">新規登録</button>
+                  </Link>
+                </>
+              )
+            }
           </div>
         </div>
         {showNavBars && (

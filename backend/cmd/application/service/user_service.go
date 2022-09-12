@@ -1,9 +1,12 @@
 package service
 
 import (
+	"net/http"
 	"time"
 
 	"github.com/cawauchi6204/qiita-copy/cmd/infrastructure/repository"
+	"github.com/cawauchi6204/qiita-copy/cmd/presentation/request"
+	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
 
@@ -39,4 +42,20 @@ func CreateUser(id, email, password string) (result *gorm.DB) {
 	}
 	repository.CreateUser(u)
 	return
+}
+
+func UpdateUser(c *gin.Context) {
+	var request request.UpdateUserRequest
+	err := c.BindJSON(&request)
+	if err != nil {
+		c.Status(http.StatusBadRequest)
+	} else {
+		u := GetUserByEmail(request.Email)
+		u.Name = request.Name
+		u.Email = request.Email
+		u.Description = request.Description
+		u.HpUrl = request.HpUrl
+		u.Location = request.Location
+		repository.UpdateUser(u)
+	}
 }

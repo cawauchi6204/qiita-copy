@@ -28,7 +28,7 @@ const Profile: React.FC<Props> = ({ }) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (i) => {
     const data = { ...i, id: user.id }
-    await axios.put("http://localhost/user", data)
+    await axios.put("/api/user", data)
     console.log("onSubmit:", data)
   };
 
@@ -61,11 +61,11 @@ const Profile: React.FC<Props> = ({ }) => {
           </div>
           <div className="mt-8">
             <p>居住地</p>
-            <input type="text" {...register("location")} className="w-full border border-solid border-gray p-2" />
+            <input defaultValue={user.location} type="text" {...register("location")} className="w-full border border-solid border-gray p-2" />
           </div>
           <div className="mt-8">
             <p>自己紹介</p>
-            <textarea {...register("description")} className="w-full border border-solid border-gray p-2" />
+            <textarea defaultValue={user.description} {...register("description")} className="w-full border border-solid border-gray p-2" />
           </div>
           <button type="submit" className="mt-6 text-white px-6 py-2 text-xs" style={{ "background": "#55C500" }}>更新する</button>
         </form>
