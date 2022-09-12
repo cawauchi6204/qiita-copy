@@ -14,7 +14,6 @@ type Props = {
 
 const Header: React.FC<Props> = ({ showNavBars = true }) => {
   const user = useRecoilValue(userState);
-  console.log('Headerの17行目のuserは' + JSON.stringify(user, null, 2))
   return (
     <header className="py-2 font-bold" style={{ "backgroundColor": "#2F3232" }}>
       <div className=" flex flex-col mx-8">
@@ -48,7 +47,7 @@ const Header: React.FC<Props> = ({ showNavBars = true }) => {
                   </Link>
                 </Menu>
                 <Menu className="inline" menuButton={<MenuButton><User className="inline ml-4" color="white" size={24} /></MenuButton>}>
-                  <Link href="/mypage">
+                  <Link href={`/${user.id}`}>
                     <a>
                       <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
                         マイページ
