@@ -14,12 +14,12 @@ type User struct {
 	Password       string    `json:"password"`
 	Email          string    `json:"email"`
 	Description    string    `json:"description"`
-	HpUrl          string    `json:"hpRrl"`
+	HpUrl          string    `json:"hpUrl"`
 	Location       string    `json:"location"`
 	GithubAccount  string    `json:"githubAccountId"`
 	OrganizationId string    `json:"organizationId"`
 	IsDeleted      int       `json:"isDeleted"`
-	CreatedAt      time.Time `json:"createdAt"`
+	CreatedAt      time.Time `json:"createdAt" sql:"DEFAULT:current_timestamp"`
 }
 
 // TODO: 今は特化関数だがBuilderパターンにしてuseCase層でimportしてビジネスロジック関数を組み立てたい
@@ -50,6 +50,14 @@ func FindUserByEmail(email string) (user User) {
 
 func CreateUser(user User) (result *gorm.DB) {
 	result = DB.Create(&user)
+	if result.Error != nil {
+		log.Fatal(result.Error)
+	}
+	return
+}
+
+func UpdateUser(user User) (result *gorm.DB) {
+	result = DB.Save(&user)
 	if result.Error != nil {
 		log.Fatal(result.Error)
 	}

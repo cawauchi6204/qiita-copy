@@ -9,7 +9,7 @@ const Card: React.FC<Pick<Post, "id" | "title" | "postedBy" | "createdAt">> = ({
         <User size={40} />
         <div className="flex flex-col">
           <Link href={`/${postedBy}`}>
-            <a>
+            <a className="hover:underline inline-block">
               {postedBy}
             </a>
           </Link>

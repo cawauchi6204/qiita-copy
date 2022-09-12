@@ -1,17 +1,18 @@
 import axios from "axios"
 import { GetServerSideProps } from "next"
+import { useRecoilValue } from "recoil"
 import CardList from "../../components/CardList"
 import Layout from "../../components/Layout"
 import UserProfile from "../../components/UserProfile"
+import { userState } from "../../contexts/UserContext"
 import { Post } from "../../types/Post"
-import { User } from "../../types/User"
 
 type Props = {
   posts: Post[]
-  user: User
 }
 
-const PostId: React.FC<Props> = ({ posts, user }) => {
+const UserId: React.FC<Props> = ({ posts }) => {
+  const user = useRecoilValue(userState);
   if (!user) return <></>
   return (
     <Layout>
@@ -33,9 +34,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!context.params) return { props: {} }
   const { userId } = context.params;
   const posts = await axios.get(`http://localhost/user/${userId}/posts`)
-  const user = await axios.get(`http://localhost/user/${userId}`)
-
-  return { props: { posts: posts.data, user: user.data } }
+  return { props: { posts: posts.data } }
 }
 
-export default PostId
+export default UserId

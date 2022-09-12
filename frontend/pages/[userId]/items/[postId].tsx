@@ -30,7 +30,7 @@ const postId: React.FC<Props> = ({ post }) => {
               <span>{post.postedBy}</span>
             </div>
             <h1 className="text-3xl font-bold">{post.title}</h1>
-            <ReactMarkdown className="mt-12" children={post.body} />
+            <ReactMarkdown className="mt-12 markdown" children={post.body} />
           </div>
         </div>
         <div className="w-3/12 flex flex-col gap-16">

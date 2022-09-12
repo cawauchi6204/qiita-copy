@@ -25,6 +25,7 @@ func Middleware() (r *gin.Engine) {
 			"POST",
 			"GET",
 			"OPTIONS",
+			"PUT",
 		},
 		// 許可したいHTTPリクエストヘッダ
 		AllowHeaders: []string{
