@@ -9,7 +9,7 @@ type Props = {
 
 const Card: React.FC<Props> = ({ post }) => {
   return (
-    <div className="w-full bg-white flex flex-col p-4">
+    <div key={post.id} className="w-full bg-white flex flex-col p-4">
       <div className="flex">
         <User size={40} />
         <div className="flex flex-col">

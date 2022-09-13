@@ -1,6 +1,7 @@
 import axios from "axios"
 import { GetServerSideProps } from "next"
 import Link from "next/link"
+import React from "react"
 import { UserPlus } from "react-feather"
 import Icon from "../../../../components/Icon"
 import Layout from "../../../../components/Layout"
@@ -18,7 +19,7 @@ const Likes: React.FC<Props> = ({ users }) => {
         {
           users.map((user) => {
             return (
-              <>
+              <React.Fragment key={user.id}>
                 <div className="flex gap-2">
                   <Icon width={60} height={60} />
                   <div className="flex flex-col">
@@ -33,7 +34,7 @@ const Likes: React.FC<Props> = ({ users }) => {
                     </button>
                   </div>
                 </div>
-              </>
+              </React.Fragment>
             )
           })
         }

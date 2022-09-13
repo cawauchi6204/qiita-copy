@@ -21,7 +21,7 @@ const Ranking: React.FC<Props> = ({ rankingTitle, rankingUnit, contents }) => {
       <ul className="flex flex-col mt-4 p-2 justify-between">
         {contents.map((content, index) => {
           return (
-            <Link href="">
+            <Link href="" key={index}>
               <a>
                 <li className="flex gap-8 hover:bg-gray-200">
                   <span>
