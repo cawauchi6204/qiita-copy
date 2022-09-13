@@ -2,7 +2,7 @@ import Card from "./Card"
 import { Post } from "../types/Post"
 
 type Props = {
-  posts: Pick<Post, "id" | "title" | "postedBy" | "createdAt">[]
+  posts: Post[]
 }
 
 const CardList: React.FC<Props> = ({ posts }) => {
@@ -11,7 +11,7 @@ const CardList: React.FC<Props> = ({ posts }) => {
       {
         posts.map((post) => {
           return (
-            <Card id={post.id} title={post.title} postedBy={post.postedBy} createdAt={post.createdAt} />
+            <Card post={post} />
           )
         })
       }

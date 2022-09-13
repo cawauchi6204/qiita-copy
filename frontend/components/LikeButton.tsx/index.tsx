@@ -1,14 +1,16 @@
+import Link from "next/link"
 import React from "react"
 import { Heart } from "react-feather"
 import useLike from "../../hooks/useLike"
+import { Post } from "../../types/Post"
 
 type Props = {
-  postId: string
+  post: Post
   userId?: string
 }
 
-const LikeButton: React.FC<Props> = ({ postId, userId }) => {
-  const { count, addCount, subtractCount, updateLike, isLike } = useLike(postId, userId)
+const LikeButton: React.FC<Props> = ({ post, userId }) => {
+  const { count, addCount, subtractCount, updateLike, isLike } = useLike(post.id, userId)
   return (
     <div>
       {userId ? (
@@ -19,7 +21,11 @@ const LikeButton: React.FC<Props> = ({ postId, userId }) => {
                 updateLike(userId)
                 addCount()
               }} />
-              <span className="ml-2">{count}</span>
+              <Link href={`/${post.postedBy}/items/${post.id}/likes`}>
+                <a>
+                  <span className="ml-2">{count}</span>
+                </a>
+              </Link>
             </>
           )
             :
@@ -29,7 +35,11 @@ const LikeButton: React.FC<Props> = ({ postId, userId }) => {
                   updateLike(userId)
                   subtractCount()
                 }} />
-                <span className="ml-2">{count}</span>
+                <Link href={`/${post.postedBy}/items/${post.id}/likes`}>
+                  <a>
+                    <span className="ml-2">{count}</span>
+                  </a>
+                </Link>
               </>
             )
           }
@@ -39,7 +49,11 @@ const LikeButton: React.FC<Props> = ({ postId, userId }) => {
         (
           <>
             <Heart strokeWidth={3} />
-            <span className="ml-2">{count}</span>
+            <Link href={`/${post.postedBy}/items/${post.id}/likes`}>
+              <a>
+                <span className="ml-2">{count}</span>
+              </a>
+            </Link>
           </>
         )
       }

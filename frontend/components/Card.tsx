@@ -3,26 +3,30 @@ import { User, Pocket, Tag } from "react-feather"
 import { Post } from "../types/Post"
 import LikeButton from "./LikeButton.tsx"
 
-const Card: React.FC<Pick<Post, "id" | "title" | "postedBy" | "createdAt">> = ({ id, title, postedBy, createdAt }) => {
+type Props = {
+  post: Post
+}
+
+const Card: React.FC<Props> = ({ post }) => {
   return (
     <div className="w-full bg-white flex flex-col p-4">
       <div className="flex">
         <User size={40} />
         <div className="flex flex-col">
-          <Link href={`/${postedBy}`}>
+          <Link href={`/${post.postedBy}`}>
             <a className="hover:underline inline-block">
-              {postedBy}
+              {post.postedBy}
             </a>
           </Link>
           <time className="text-xs text-gray">
-            {createdAt}
+            {post.createdAt}
           </time>
         </div>
       </div>
       <div className="flex flex-col ml-10">
-        <Link href={`/${postedBy}/items/${id}`}>
+        <Link href={`/${post.postedBy}/items/${post.id}`}>
           <a className="text-2xl mt-2 font-bold hover:underline">
-            {title}
+            {post.title}
           </a>
         </Link>
       </div>
@@ -34,7 +38,7 @@ const Card: React.FC<Pick<Post, "id" | "title" | "postedBy" | "createdAt">> = ({
           </a>
         </Link>
         <div className="flex justify-between mt-2">
-          <LikeButton postId={id} />
+          <LikeButton post={post} />
           <Pocket size={40} />
         </div>
       </div>

@@ -21,7 +21,7 @@ const postId: React.FC<Props> = ({ post }) => {
     <Layout>
       <div className="flex gap-4">
         <div className="w-1/12 flex flex-col gap-4 items-end pr-6">
-          <LikeButton postId={post.id} userId={user?.id} />
+          <LikeButton post={post} userId={user?.id} />
           <Pocket />
           <Twitter />
           <Facebook />
