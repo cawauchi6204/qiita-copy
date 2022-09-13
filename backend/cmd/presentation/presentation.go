@@ -64,6 +64,9 @@ func Router() {
 		authUserGroup.PUT("/user", func(c *gin.Context) {
 			service.UpdateUser(c)
 		})
+		authUserGroup.PUT("/like", func(c *gin.Context) {
+			service.UpdateLike(c)
+		})
 	}
 
 	deployPort := os.Getenv("PORT")
