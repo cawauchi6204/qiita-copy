@@ -21,6 +21,13 @@ func FindLikesAll() {
 	}
 }
 
+func FindLikesByPostId(postId string) (like []Like) {
+	if err := DB.Where("post_id = ?", postId).Find(&like).Error; err != nil {
+		fmt.Println(err)
+	}
+	return
+}
+
 func FindLikeById(postId, userId string) (like Like) {
 	if err := DB.Where("post_id = ? AND like_user_id = ?", postId, userId).Take(&like).Error; err != nil {
 		fmt.Println(err)

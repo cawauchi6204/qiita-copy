@@ -10,6 +10,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func GetLikesByPostId(postId string) (likes []repository.Like) {
+	likes = repository.FindLikesByPostId(postId)
+	return
+}
+
 func UpdateLike(c *gin.Context) {
 	var request request.UpdateLikeRequest
 	err := c.BindJSON(&request)

@@ -1,6 +1,7 @@
 import Link from "next/link"
-import { User, Pocket, Heart, Tag } from "react-feather"
+import { User, Pocket, Tag } from "react-feather"
 import { Post } from "../types/Post"
+import LikeButton from "./LikeButton.tsx"
 
 const Card: React.FC<Pick<Post, "id" | "title" | "postedBy" | "createdAt">> = ({ id, title, postedBy, createdAt }) => {
   return (
@@ -33,7 +34,7 @@ const Card: React.FC<Pick<Post, "id" | "title" | "postedBy" | "createdAt">> = ({
           </a>
         </Link>
         <div className="flex justify-between mt-2">
-          <Heart size={16} />
+          <LikeButton postId={id} />
           <Pocket size={40} />
         </div>
       </div>

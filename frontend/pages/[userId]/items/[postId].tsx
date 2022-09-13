@@ -1,12 +1,13 @@
 import axios from "axios"
 import { GetServerSideProps } from "next"
 import Image from "next/image"
-import { Facebook, Heart, MoreHorizontal, Pocket, Twitter } from "react-feather"
+import { Facebook, MoreHorizontal, Pocket, Twitter } from "react-feather"
 import ReactMarkdown from 'react-markdown'
 import { useRecoilValue } from "recoil"
 
 import Icon from "../../../components/Icon"
 import Layout from "../../../components/Layout"
+import LikeButton from "../../../components/LikeButton.tsx"
 import { userState } from "../../../contexts/UserContext"
 import { Post } from "../../../types/Post"
 
@@ -16,28 +17,12 @@ type Props = {
 
 const postId: React.FC<Props> = ({ post }) => {
   const user = useRecoilValue(userState);
-
-  const updateLike = async () => {
-    try {
-      axios.put("/api/like",
-        {
-          postId: post.id,
-          userId: user?.id
-        })
-    } catch (e) {
-      console.error(e)
-    }
-  }
   return (
     <Layout>
       <div className="flex gap-4">
         <div className="w-1/12 flex flex-col gap-4 items-end pr-6">
-          {user && user.id && (
-            <>
-              <Heart onClick={updateLike} />
-              <Pocket />
-            </>
-          )}
+          <LikeButton postId={post.id} userId={user?.id} />
+          <Pocket />
           <Twitter />
           <Facebook />
           <MoreHorizontal />

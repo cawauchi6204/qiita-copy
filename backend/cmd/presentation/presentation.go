@@ -48,6 +48,11 @@ func Router() {
 		post := service.GetPostByUserId(userId, postId)
 		c.JSON(200, post)
 	})
+	r.GET("/post/:postId/likes", func(c *gin.Context) {
+		postId := c.Param("postId")
+		likes := service.GetLikesByPostId(postId)
+		c.JSON(200, likes)
+	})
 	authUserGroup := r.Group("/")
 	authUserGroup.Use(middleware.LoginCheckMiddleware())
 	{
