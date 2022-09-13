@@ -1,6 +1,7 @@
 package presentation
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 
@@ -53,6 +54,7 @@ func Router() {
 	r.GET("user/:userId/items/:postId/likes", func(c *gin.Context) {
 		postId := c.Param("postId")
 		likes := service.GetLikesByPostId(postId)
+
 		userIds := []string{}
 		for _, v := range likes {
 			userIds = append(userIds, v.LikeUserId)
@@ -60,6 +62,19 @@ func Router() {
 		users := service.GetUsersById(userIds)
 		c.JSON(200, users)
 	})
+	r.GET("/post/:postId/likes", func(c *gin.Context) {
+		postId := c.Param("postId")
+		likes := service.GetLikesByPostId(postId)
+		c.JSON(200, likes)
+	})
+	r.GET("/post/:postId/tags", func(c *gin.Context) {
+		postId := c.Param("postId")
+		tags := service.GetTagsByPostId(postId)
+		fmt.Println("tagsは")
+		fmt.Println(tags)
+		c.JSON(200, tags)
+	})
+
 	// ↓↓↓↓ログイン済みのときに叩けるAPI↓↓↓↓
 	authUserGroup := r.Group("/")
 	authUserGroup.Use(middleware.LoginCheckMiddleware())

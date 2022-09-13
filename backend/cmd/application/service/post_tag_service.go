@@ -4,6 +4,11 @@ import (
 	"github.com/cawauchi6204/qiita-copy/cmd/infrastructure/repository"
 )
 
+func GetTagsByPostId(postId string) (postTags []repository.PostTag) {
+	postTags = repository.FindTagsByPostId(postId)
+	return
+}
+
 func CreatePostTag(postId, tagId string) repository.PostTag {
 	postTag := repository.PostTag{
 		PostId: postId,

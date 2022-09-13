@@ -10,12 +10,14 @@ import Layout from "../../../components/Layout"
 import LikeButton from "../../../components/LikeButton"
 import { userState } from "../../../contexts/UserContext"
 import { Post } from "../../../types/Post"
+import { Tag } from "../../../types/Tag"
 
 type Props = {
   post: Post
+  tags: Tag[]
 }
 
-const postId: React.FC<Props> = ({ post }) => {
+const postId: React.FC<Props> = ({ post, tags }) => {
   const user = useRecoilValue(userState);
   return (
     <Layout>
@@ -34,6 +36,7 @@ const postId: React.FC<Props> = ({ post }) => {
               <span>{post.postedBy}</span>
             </div>
             <h1 className="text-3xl font-bold">{post.title}</h1>
+            {tags.map((tag) => (<p>{tag.tagId}</p>))}
             <ReactMarkdown className="mt-12 markdown" children={post.body} />
           </div>
         </div>
@@ -51,6 +54,8 @@ export default postId
 export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!context.params) return { props: {} }
   const { userId, postId } = context.params
-  const res = await axios.get<Post>(`http://localhost/user/${userId}/items/${postId}`)
-  return { props: { post: res.data } }
+  // FIXME: 意味がないのでpost/postIdにするべき
+  const posts = await axios.get<Post>(`http://localhost/user/${userId}/items/${postId}`)
+  const tags = await axios.get<Tag[]>(`http://localhost/post/${postId}/tags`)
+  return { props: { post: posts.data, tags: tags.data } }
 }
