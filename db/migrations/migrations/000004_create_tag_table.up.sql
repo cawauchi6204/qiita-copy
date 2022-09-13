@@ -1,8 +1,5 @@
 CREATE TABLE
   IF NOT EXISTS tags(
     id VARCHAR(50),
-    name VARCHAR (50) UNIQUE NOT NULL,
-    posted_by VARCHAR(50) NOT NULL,
-    is_deleted BOOLEAN NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+    img_url TEXT
   );

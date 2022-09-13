@@ -1,7 +1,8 @@
 import Link from "next/link"
 import { User, Pocket, Tag } from "react-feather"
+
 import { Post } from "../types/Post"
-import LikeButton from "./LikeButton.tsx"
+import LikeButton from "./LikeButton"
 
 type Props = {
   post: Post

@@ -7,7 +7,7 @@ import { useRecoilValue } from "recoil"
 
 import Icon from "../../../components/Icon"
 import Layout from "../../../components/Layout"
-import LikeButton from "../../../components/LikeButton.tsx"
+import LikeButton from "../../../components/LikeButton"
 import { userState } from "../../../contexts/UserContext"
 import { Post } from "../../../types/Post"
 
