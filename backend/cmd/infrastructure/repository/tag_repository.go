@@ -11,7 +11,7 @@ type Tag struct {
 	ImgUrl string `json:"imgUrl"`
 }
 
-func CreateTags(tag Tag) (result *gorm.DB) {
+func CreateTag(tag Tag) (result *gorm.DB) {
 	result = DB.Create(&tag)
 	if result.Error != nil {
 		log.Fatal(result.Error)

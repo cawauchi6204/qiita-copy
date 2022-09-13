@@ -87,7 +87,8 @@ func Router() {
 			if err != nil {
 				c.Status(http.StatusBadRequest)
 			} else {
-				service.CreateTags(request.ID, request.ImgUrl)
+				service.CreateTag(request.ID, request.ImgUrl)
+				service.CreatePostTag(request.PostId, request.ID)
 			}
 		})
 	}

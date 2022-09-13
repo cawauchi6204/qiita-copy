@@ -1,6 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 import Layout from "../components/Layout"
+import router from "next/router"
 
 // TODO: 要リファクタ(汚すぎる)
 const SignUp = ({ }) => {
@@ -12,6 +13,7 @@ const SignUp = ({ }) => {
       await axios.post('/api/signup', {
         id, email, password
       })
+      router.reload()
     } catch (e) {
       console.error(e)
     }
@@ -28,6 +30,7 @@ const SignUp = ({ }) => {
       await axios.post('/api/login', {
         email, password
       })
+      router.reload()
     } catch (e) {
       console.error(e)
     }
@@ -35,6 +38,7 @@ const SignUp = ({ }) => {
   const logout = async () => {
     try {
       await axios.post('/api/logout')
+      router.reload()
     } catch (e) {
       console.error(e)
     }

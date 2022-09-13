@@ -2,6 +2,7 @@ import Layout from "../components/Layout"
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import Link from "next/link";
+import router from "next/router";
 
 type Inputs = {
   email: string
@@ -17,6 +18,7 @@ const Login: React.FC<Props> = ({ }) => {
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     await axios.post('/api/login', data)
+    router.reload()
   };
   return (
     <Layout>
