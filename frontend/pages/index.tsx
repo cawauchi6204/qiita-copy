@@ -1,4 +1,6 @@
 import type { GetServerSideProps, NextPage } from 'next'
+import Image from "next/image"
+
 import Layout from "../components/Layout"
 import CardList from "../components/CardList"
 import Ranking from "../components/Ranking"
@@ -41,14 +43,16 @@ const Home: NextPage<Props> = ({ posts }) => {
   return (
     <Layout>
       <div className="flex gap-8">
-        <div className="w-1/6">
+        <div className="w-1/5">
           <Ranking rankingTitle="タグランキング" rankingUnit="users" contents={dummyRanking} />
         </div>
-        <div className="w-2/3">
+        <div className="w-3/5">
           <CardList posts={posts} />
         </div>
-        <div className="w-1/6">
-          <Ranking rankingTitle="タグランキング" rankingUnit="users" contents={dummyRanking} />
+        <div className="w-80">
+          <a href="https://lp.nijibox.jp/cp/postdev/" target="_blank">
+            <Image src="/adv-3.png" width={300} height={250} />
+          </a>
         </div>
       </div>
     </Layout>

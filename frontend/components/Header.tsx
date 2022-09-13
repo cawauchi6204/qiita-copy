@@ -105,7 +105,7 @@ const Header: React.FC<Props> = ({ showNavBars = true }) => {
           </div>
         </div>
         {showNavBars && (
-          <ul className="flex text-gray-400 text-xs gap-6 mt-2">
+          <ul className="flex text-gray-400 text-medium gap-6 mt-2 mx-4">
             <li>
               <Link href="/">
                 <a className="hover:text-white">
