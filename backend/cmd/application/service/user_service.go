@@ -20,6 +20,11 @@ func GetUserById(userId string) (user repository.User) {
 	return
 }
 
+func GetUsersById(userIds []string) (users []repository.User) {
+	users = repository.FindUsersById(userIds)
+	return
+}
+
 func GetUserByEmail(email string) (user repository.User) {
 	user = repository.FindUserByEmail(email)
 	return

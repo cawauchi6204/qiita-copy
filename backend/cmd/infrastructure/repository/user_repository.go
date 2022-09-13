@@ -40,6 +40,14 @@ func FindUserById(userId string) (user User) {
 	return
 }
 
+func FindUsersById(userIds []string) (users []User) {
+	users = []User{}
+	if err := DB.Where("id IN ?", userIds).Find(&users).Error; err != nil {
+		fmt.Println(err)
+	}
+	return
+}
+
 func FindUserByEmail(email string) (user User) {
 	user = User{}
 	if err := DB.First(&user, "email = ?", email).Error; err != nil {

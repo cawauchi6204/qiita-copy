@@ -48,6 +48,16 @@ func Router() {
 		post := service.GetPostByUserId(userId, postId)
 		c.JSON(200, post)
 	})
+	r.GET("user/:userId/items/:postId/likes", func(c *gin.Context) {
+		postId := c.Param("postId")
+		likes := service.GetLikesByPostId(postId)
+		userIds := []string{}
+		for _, v := range likes {
+			userIds = append(userIds, v.LikeUserId)
+		}
+		users := service.GetUsersById(userIds)
+		c.JSON(200, users)
+	})
 	r.GET("/post/:postId/likes", func(c *gin.Context) {
 		postId := c.Param("postId")
 		likes := service.GetLikesByPostId(postId)

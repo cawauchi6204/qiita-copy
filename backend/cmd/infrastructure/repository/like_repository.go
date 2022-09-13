@@ -13,16 +13,8 @@ type Like struct {
 }
 
 // TODO: 今は特化関数だがBuilderパターンにしてuseCase層でimportしてビジネスロジック関数を組み立てたい
-
-func FindLikesAll() {
-	likes := []Like{}
-	if err := DB.Find(&likes).Error; err != nil {
-		fmt.Println(err)
-	}
-}
-
-func FindLikesByPostId(postId string) (like []Like) {
-	if err := DB.Where("post_id = ?", postId).Find(&like).Error; err != nil {
+func FindLikesByPostId(postId string) (likes []Like) {
+	if err := DB.Where("post_id = ?", postId).Find(&likes).Error; err != nil {
 		fmt.Println(err)
 	}
 	return
