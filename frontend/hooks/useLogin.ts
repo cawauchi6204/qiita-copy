@@ -6,8 +6,12 @@ const useLogin = () => {
 	const [loginInfo, setLoginInfo] = useState<User>()
 
 	const getUserInfo = async () => {
-		const ret = await axios.get<User>('/api/myinfo')
-    setLoginInfo(ret.data)
+    try {
+      const ret = await axios.get<User>('/api/myinfo')
+      setLoginInfo(ret.data)
+    } catch(e) {
+      console.error(e)
+    }
 	}
 	useEffect(() => {
 		getUserInfo()

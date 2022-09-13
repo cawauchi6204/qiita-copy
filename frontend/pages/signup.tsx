@@ -8,23 +8,43 @@ const SignUp = ({ }) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const handleSubmit = async () => {
-    await axios.post('/api/signup', {
-      id, email, password
-    })
+    try {
+      await axios.post('/api/signup', {
+        id, email, password
+      })
+    } catch (e) {
+      console.error(e)
+    }
   }
   const getUser = async () => {
-    await axios.get('/api/users')
+    try {
+      await axios.get('/api/users')
+    } catch (e) {
+      console.error(e)
+    }
   }
   const login = async () => {
-    await axios.post('/api/login', {
-      email, password
-    })
+    try {
+      await axios.post('/api/login', {
+        email, password
+      })
+    } catch (e) {
+      console.error(e)
+    }
   }
   const logout = async () => {
-    await axios.post('/api/logout')
+    try {
+      await axios.post('/api/logout')
+    } catch (e) {
+      console.error(e)
+    }
   }
   const mypage = async () => {
-    await axios.get('/api/mypage')
+    try {
+      await axios.get('/api/mypage')
+    } catch (e) {
+      console.error(e)
+    }
   }
   return (
     <Layout>
