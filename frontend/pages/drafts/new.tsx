@@ -12,7 +12,7 @@ const New: React.FC = ({ }) => {
   const user = useRecoilValue(userState);
   const handleSubmit = async () => {
     try {
-      await axios.post("/api/post",
+      const result = await axios.post("/api/post",
         {
           title,
           body,
@@ -21,6 +21,7 @@ const New: React.FC = ({ }) => {
           isDraft: 0,
           isDeleted: 0
         })
+      console.log('newの24行目のresultは' + JSON.stringify(result, null, 2))
       tags.forEach(async (tag) => {
         await axios.post("/api/tag", { id: tag, imgUrl: "" })
       })

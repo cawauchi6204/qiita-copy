@@ -60,11 +60,7 @@ func Router() {
 		users := service.GetUsersById(userIds)
 		c.JSON(200, users)
 	})
-	r.GET("/post/:postId/likes", func(c *gin.Context) {
-		postId := c.Param("postId")
-		likes := service.GetLikesByPostId(postId)
-		c.JSON(200, likes)
-	})
+	// ↓↓↓↓ログイン済みのときに叩けるAPI↓↓↓↓
 	authUserGroup := r.Group("/")
 	authUserGroup.Use(middleware.LoginCheckMiddleware())
 	{
@@ -76,7 +72,8 @@ func Router() {
 			c.JSON(200, user)
 		})
 		authUserGroup.POST("/post", func(c *gin.Context) {
-			service.CreatePost(c)
+			post := service.CreatePost(c)
+			c.JSON(200, post)
 		})
 		authUserGroup.PUT("/user", func(c *gin.Context) {
 			service.UpdateUser(c)
@@ -94,6 +91,7 @@ func Router() {
 			}
 		})
 	}
+	// ↑↑↑↑ここまで↑↑↑↑
 
 	deployPort := os.Getenv("PORT")
 	if deployPort == "" {
