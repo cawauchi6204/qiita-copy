@@ -1,20 +1,21 @@
 import axios from "axios"
 import { GetServerSideProps } from "next"
 import Image from "next/image"
-import { Facebook, MoreHorizontal, Pocket, Twitter } from "react-feather"
+import { Facebook, MoreHorizontal, Pocket, Tag as TagIcon, Twitter } from "react-feather"
 import ReactMarkdown from 'react-markdown'
 import { useRecoilValue } from "recoil"
 
 import Icon from "../../../components/Icon"
 import Layout from "../../../components/Layout"
 import LikeButton from "../../../components/LikeButton"
+import Tags from "../../../components/Tags"
 import { userState } from "../../../contexts/UserContext"
 import { Post } from "../../../types/Post"
-import { Tag } from "../../../types/Tag"
+import { BlogTag } from "../../../types/Tag"
 
 type Props = {
   post: Post
-  tags: Tag[]
+  tags: BlogTag[]
 }
 
 const postId: React.FC<Props> = ({ post, tags }) => {
@@ -36,7 +37,7 @@ const postId: React.FC<Props> = ({ post, tags }) => {
               <span>{post.postedBy}</span>
             </div>
             <h1 className="text-3xl font-bold">{post.title}</h1>
-            {tags.map((tag) => (<p>{tag.tagId}</p>))}
+            <Tags postId={post.id} />
             <ReactMarkdown className="mt-12 markdown" children={post.body} />
           </div>
         </div>
@@ -56,6 +57,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { userId, postId } = context.params
   // FIXME: 意味がないのでpost/postIdにするべき
   const posts = await axios.get<Post>(`http://localhost/user/${userId}/items/${postId}`)
-  const tags = await axios.get<Tag[]>(`http://localhost/post/${postId}/tags`)
+  const tags = await axios.get<BlogTag[]>(`http://localhost/post/${postId}/tags`)
   return { props: { post: posts.data, tags: tags.data } }
 }

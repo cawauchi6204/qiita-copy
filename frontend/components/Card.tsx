@@ -1,8 +1,10 @@
 import Link from "next/link"
-import { User, Pocket, Tag } from "react-feather"
+import { User } from "react-feather"
 
+
+import useTag from "../hooks/useTag"
 import { Post } from "../types/Post"
-import LikeButton from "./LikeButton"
+import Tags from "./Tags"
 
 type Props = {
   post: Post
@@ -31,19 +33,8 @@ const Card: React.FC<Props> = ({ post }) => {
           </a>
         </Link>
       </div>
-      <div className="ml-10">
-        <Tag className="inline" size={16} />
-        <Link href="">
-          <a>
-            Git
-          </a>
-        </Link>
-        <div className="flex justify-between mt-2">
-          <LikeButton post={post} />
-          <Pocket size={40} />
-        </div>
-      </div>
-    </div >
+      <Tags postId={post.id} />
+    </div>
   )
 }
 
