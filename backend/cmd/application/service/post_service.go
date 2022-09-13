@@ -9,7 +9,6 @@ import (
 	"github.com/cawauchi6204/qiita-copy/cmd/presentation/request"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"gorm.io/gorm"
 )
 
 func GetAllPosts() (posts []repository.Post) {
@@ -27,7 +26,7 @@ func GetPostByUserId(userId, postId string) (post repository.Post) {
 	return
 }
 
-func CreatePost(c *gin.Context) (result *gorm.DB) {
+func CreatePost(c *gin.Context) (post repository.Post) {
 	var request request.CreatePostRequest
 	err := c.BindJSON(&request)
 	if err != nil {
@@ -36,7 +35,6 @@ func CreatePost(c *gin.Context) (result *gorm.DB) {
 		u, err := uuid.NewRandom()
 		if err != nil {
 			fmt.Println(err)
-			return
 		}
 		uu := u.String()
 		if err != nil {
@@ -53,7 +51,7 @@ func CreatePost(c *gin.Context) (result *gorm.DB) {
 			CreatedAt:      time.Now(),
 			UpdatedAt:      time.Now(),
 		}
-		repository.CreatePost(p)
+		post = repository.CreatePost(p)
 	}
 	return
 }

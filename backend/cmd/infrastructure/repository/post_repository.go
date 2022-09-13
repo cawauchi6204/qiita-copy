@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"log"
 	"time"
-
-	"gorm.io/gorm"
 )
 
 type Post struct {
@@ -46,10 +44,18 @@ func FindPostByUserId(userId, postId string) (post Post) {
 	return
 }
 
-func CreatePost(post Post) (result *gorm.DB) {
-	result = DB.Create(&post)
+func CreatePost(post Post) Post {
+	result := DB.Create(&post)
 	if result.Error != nil {
 		log.Fatal(result.Error)
 	}
-	return
+	return Post{
+		ID:             post.ID,
+		Title:          post.Title,
+		Body:           post.Body,
+		PostedBy:       post.PostedBy,
+		OrganizationId: post.OrganizationId,
+		IsDraft:        post.IsDraft,
+		IsDeleted:      post.IsDeleted,
+	}
 }

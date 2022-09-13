@@ -1,9 +1,11 @@
 import axios from 'axios'
+import router from 'next/router'
 import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { useRecoilValue } from 'recoil'
 import Header from '../../components/Header'
 import { userState } from '../../contexts/UserContext'
+import { Post } from '../../types/Post'
 
 const New: React.FC = ({ }) => {
   const [title, setTitle] = useState("")
@@ -12,7 +14,7 @@ const New: React.FC = ({ }) => {
   const user = useRecoilValue(userState);
   const handleSubmit = async () => {
     try {
-      await axios.post("/api/post",
+      const response = await axios.post<Post>("/api/post",
         {
           title,
           body,
@@ -22,8 +24,9 @@ const New: React.FC = ({ }) => {
           isDeleted: 0
         })
       tags.forEach(async (tag) => {
-        await axios.post("/api/tag", { id: tag, imgUrl: "" })
+        await axios.post("/api/tag", { id: tag, imgUrl: "", postId: response.data.id })
       })
+      router.push(`/${response.data.postedBy}/items/${response.data.id}`);
     } catch (e) {
       console.error(e)
     }
