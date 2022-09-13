@@ -1,11 +1,13 @@
 package presentation
 
 import (
+	"net/http"
 	"os"
 
 	"github.com/cawauchi6204/qiita-copy/cmd/application/coordinator"
 	"github.com/cawauchi6204/qiita-copy/cmd/application/service"
 	"github.com/cawauchi6204/qiita-copy/cmd/middleware"
+	"github.com/cawauchi6204/qiita-copy/cmd/presentation/request"
 	"github.com/gin-gonic/gin"
 )
 
@@ -81,6 +83,15 @@ func Router() {
 		})
 		authUserGroup.PUT("/like", func(c *gin.Context) {
 			service.UpdateLike(c)
+		})
+		authUserGroup.POST("/tag", func(c *gin.Context) {
+			var request request.CreateTagRequest
+			err := c.BindJSON(&request)
+			if err != nil {
+				c.Status(http.StatusBadRequest)
+			} else {
+				service.CreateTags(request.ID, request.ImgUrl)
+			}
 		})
 	}
 

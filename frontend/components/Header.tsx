@@ -114,13 +114,6 @@ const Header: React.FC<Props> = ({ showNavBars = true }) => {
               </Link>
             </li>
             <li>
-              <Link href="/timeline">
-                <a className="hover:text-white">
-                  タイムライン
-                </a>
-              </Link>
-            </li>
-            <li>
               <Link href="/trend">
                 <a className="hover:text-white">
                   トレンド
