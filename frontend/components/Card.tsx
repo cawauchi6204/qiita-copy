@@ -1,9 +1,8 @@
 import Link from "next/link"
 import { User } from "react-feather"
 
-
-import useTag from "../hooks/useTag"
 import { Post } from "../types/Post"
+import LikeButton from "./LikeButton"
 import Tags from "./Tags"
 
 type Props = {
@@ -34,6 +33,7 @@ const Card: React.FC<Props> = ({ post }) => {
         </Link>
       </div>
       <Tags postId={post.id} />
+      <LikeButton post={post} />
     </div>
   )
 }
