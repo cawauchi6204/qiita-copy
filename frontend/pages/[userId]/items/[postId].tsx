@@ -11,7 +11,7 @@ import LikeButton from "../../../components/LikeButton"
 import Tags from "../../../components/Tags"
 import { userState } from "../../../contexts/UserContext"
 import { Post } from "../../../types/Post"
-import { BlogTag } from "../../../types/Tag"
+import { BlogTag } from "../../../types/BlogTag"
 
 type Props = {
   post: Post

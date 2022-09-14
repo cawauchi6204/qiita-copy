@@ -1,7 +1,6 @@
 package presentation
 
 import (
-	"fmt"
 	"net/http"
 	"os"
 
@@ -70,9 +69,12 @@ func Router() {
 	r.GET("/post/:postId/tags", func(c *gin.Context) {
 		postId := c.Param("postId")
 		tags := service.GetTagsByPostId(postId)
-		fmt.Println("tagsは")
-		fmt.Println(tags)
 		c.JSON(200, tags)
+	})
+	r.GET("/tag/:tagId", func(c *gin.Context) {
+		tagId := c.Param("tagId")
+		tag := service.GetTagById(tagId)
+		c.JSON(200, tag)
 	})
 
 	// ↓↓↓↓ログイン済みのときに叩けるAPI↓↓↓↓

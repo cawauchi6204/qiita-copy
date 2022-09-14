@@ -1,5 +1,4 @@
 export type Tag = {
-	id: number
-	postId: string
-	tagId: string
+	id: string
+  imgUrl: string
 }

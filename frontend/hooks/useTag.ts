@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { BlogTag } from '../types/Tag'
+import { BlogTag } from '../types/BlogTag'
 
 const useTag = (postId: string) => {
 	const [tags, setTags] = useState<BlogTag[]>([])
