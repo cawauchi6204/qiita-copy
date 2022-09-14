@@ -9,6 +9,11 @@ func GetTagsByPostId(postId string) (postTags []repository.PostTag) {
 	return
 }
 
+func GetPostIdsByTagId(tagId string) (postIds []string) {
+	postIds = repository.FindPostsIdsByTagId(tagId)
+	return
+}
+
 func CreatePostTag(postId, tagId string) repository.PostTag {
 	postTag := repository.PostTag{
 		PostId: postId,

@@ -76,6 +76,13 @@ func Router() {
 		tag := service.GetTagById(tagId)
 		c.JSON(200, tag)
 	})
+	r.GET("/post/tags/:tagId", func(c *gin.Context) {
+		tagId := c.Param("tagId")
+		// tagIdからpostIdsを取得してくる
+		postIds := service.GetPostIdsByTagId(tagId)
+		posts := service.GetPostsByIds(postIds)
+		c.JSON(200, posts)
+	})
 
 	// ↓↓↓↓ログイン済みのときに叩けるAPI↓↓↓↓
 	authUserGroup := r.Group("/")

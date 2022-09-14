@@ -4,13 +4,17 @@ import Image from "next/image"
 
 import CardList from "../../components/CardList"
 import Layout from "../../components/Layout"
+import { Post } from "../../types/Post"
 import { Tag } from "../../types/Tag"
 
-type Props = { tag: Tag }
+type Props = {
+  tag: Tag
+  posts: Post[]
+}
 
-const TagId: React.FC<Props> = ({ tag }) => {
+const TagId: React.FC<Props> = ({ tag, posts }) => {
   return (
-    <Layout className="flex">
+    <Layout className="flex gap-6">
       <div className="w-1/3">
         <div className="flex flex-col bg-white text-center p-6">
           <div className="mx-auto">
@@ -33,7 +37,7 @@ const TagId: React.FC<Props> = ({ tag }) => {
         </div>
       </div>
       <div className="w-2/3">
-        <CardList posts={[]} />
+        <CardList posts={posts} />
       </div>
     </Layout>
   )
@@ -48,5 +52,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     encodeURI(
       `http://localhost/tag/${tagId}`
     ))
-  return { props: { tag: tag.data } }
+  const posts = await axios.get<Post[]>(
+    encodeURI(
+      `http://localhost/post/tags/${tagId}`
+    ))
+  return { props: { tag: tag.data, posts: posts.data } }
 }

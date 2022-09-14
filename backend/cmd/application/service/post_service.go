@@ -26,6 +26,11 @@ func GetPostByUserId(userId, postId string) (post repository.Post) {
 	return
 }
 
+func GetPostsByIds(ids []string) (posts []repository.Post) {
+	posts = repository.FindPostsById(ids)
+	return
+}
+
 func CreatePost(c *gin.Context) (post repository.Post) {
 	var request request.CreatePostRequest
 	err := c.BindJSON(&request)

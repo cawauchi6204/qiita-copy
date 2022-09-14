@@ -19,6 +19,20 @@ func FindTagsByPostId(postId string) (postTags []PostTag) {
 	return
 }
 
+func FindPostsIdsByTagId(tagId string) (postIds []string) {
+	postTag := []PostTag{}
+	if err := DB.Find(&postTag, "tag_id = ?", tagId).Error; err != nil {
+		fmt.Println(err)
+	}
+
+	postIds = []string{}
+	for _, v := range postTag {
+		postIds = append(postIds, v.PostId)
+	}
+	fmt.Println(postIds)
+	return
+}
+
 func CreatePostTag(postTag PostTag) PostTag {
 	result := DB.Create(&postTag)
 	if result.Error != nil {

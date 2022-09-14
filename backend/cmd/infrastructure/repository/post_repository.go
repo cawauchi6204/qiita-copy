@@ -36,6 +36,16 @@ func FindPostsAllByUserId(userId string) (posts []Post) {
 	return
 }
 
+func FindPostsById(ids []string) (posts []Post) {
+	posts = []Post{}
+	if err := DB.Find(&posts, "id IN (?)", ids).Error; err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println("postsは")
+	fmt.Println(posts)
+	return
+}
+
 func FindPostByUserId(userId, postId string) (post Post) {
 	post = Post{}
 	if err := DB.Where("posted_by = ? AND id = ?", userId, postId).First(&post).Error; err != nil {
