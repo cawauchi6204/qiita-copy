@@ -17,13 +17,13 @@ const LikeButton: React.FC<Props> = ({ post, userId }) => {
         <>
           {isLike ? (
             <>
-              <Heart onClick={() => {
+              <Heart className="cursor-pointer" onClick={() => {
                 updateLike(userId)
                 addCount()
               }} />
               <Link href={`/${post.postedBy}/items/${post.id}/likes`}>
                 <a>
-                  <span className="ml-2">{count}</span>
+                  <span className="ml-2 hover:underline">{count}</span>
                 </a>
               </Link>
             </>
@@ -31,13 +31,13 @@ const LikeButton: React.FC<Props> = ({ post, userId }) => {
             :
             (
               <>
-                <Heart strokeWidth={3} onClick={() => {
+                <Heart className="cursor-pointer" strokeWidth={3} onClick={() => {
                   updateLike(userId)
                   subtractCount()
                 }} />
                 <Link href={`/${post.postedBy}/items/${post.id}/likes`}>
                   <a>
-                    <span className="ml-2">{count}</span>
+                    <span className="ml-2 hover:underline">{count}</span>
                   </a>
                 </Link>
               </>
@@ -48,10 +48,10 @@ const LikeButton: React.FC<Props> = ({ post, userId }) => {
 
         (
           <>
-            <Heart strokeWidth={3} />
+            <Heart className="cursor-pointer" strokeWidth={3} />
             <Link href={`/${post.postedBy}/items/${post.id}/likes`}>
               <a>
-                <span className="ml-2">{count}</span>
+                <span className="ml-2 hover:underline">{count}</span>
               </a>
             </Link>
           </>

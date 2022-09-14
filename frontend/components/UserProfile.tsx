@@ -34,13 +34,15 @@ const UserProfile: React.FC<Props> = ({ user }) => {
       </div>
       <div>
         <Hexagon className="inline mr-2" color="gray" size={15} />
-        <span className="text-gray-500 text-xs">{user.hpUrl}</span>
+        <a href={user.hpUrl} target="_blank">
+          <span className="text-gray-500 text-xs">{user.hpUrl}</span>
+        </a>
       </div>
       <div>
         <MapPin className="inline mr-2" color="gray" size={15} />
         <span className="text-gray-500 text-xs">{user.location}</span>
       </div>
-    </div>
+    </div >
   )
 }
 
