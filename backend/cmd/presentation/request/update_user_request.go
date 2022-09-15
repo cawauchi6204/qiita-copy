@@ -7,4 +7,5 @@ type UpdateUserRequest struct {
 	HpUrl         string `json:"hpUrl"`
 	Location      string `json:"location"`
 	GithubAccount string `json:"githubAccountId"`
+	ImgUrl        string `json:"imgUrl"`
 }

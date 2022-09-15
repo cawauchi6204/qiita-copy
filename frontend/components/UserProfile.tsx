@@ -12,7 +12,7 @@ const UserProfile: React.FC<Props> = ({ user }) => {
   return (
     <div className="w-full bg-white p-6">
       <div className="flex flex-col items-center gap-2 mb-6">
-        <Icon width={60} height={60} />
+        <Icon src={user.imgUrl} width={60} height={60} />
         <p className="font-bold">{user.name}</p>
         <p className="text-gray-500 text-md">@{user.id}</p>
         <div className="w-4/5">

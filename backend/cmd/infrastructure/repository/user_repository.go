@@ -14,6 +14,7 @@ type User struct {
 	Password       string    `json:"password"`
 	Email          string    `json:"email"`
 	Description    string    `json:"description"`
+	ImgUrl         string    `json:"imgUrl"`
 	HpUrl          string    `json:"hpUrl"`
 	Location       string    `json:"location"`
 	GithubAccount  string    `json:"githubAccountId"`
