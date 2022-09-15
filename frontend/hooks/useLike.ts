@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Like } from '../types/Like'
 
 const useLike = (postId: string, userId?: string) => {
@@ -15,7 +15,7 @@ const useLike = (postId: string, userId?: string) => {
 			console.error(e)
 		}
 	}
-	useLayoutEffect(() => {
+	useEffect(() => {
 		getLikes()
 		if (userId) {
 			updateIsLike(userId)

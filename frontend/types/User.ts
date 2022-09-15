@@ -4,6 +4,7 @@ export type User = {
 	password: string
 	email: string
 	description: string
+  imgUrl: string
 	hpUrl: string
 	location: string
 	githubAccountId: string

@@ -1,6 +1,7 @@
 package presentation
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 
@@ -100,7 +101,14 @@ func Router() {
 			c.JSON(200, post)
 		})
 		authUserGroup.PUT("/user", func(c *gin.Context) {
-			service.UpdateUser(c)
+			u := coordinator.GetMyInfo(c)
+			var request request.UpdateUserRequest
+			err := c.BindJSON(&request)
+			if err != nil {
+				c.Status(http.StatusBadRequest)
+			}
+			fmt.Println(request)
+			service.UpdateUser(u, request)
 		})
 		authUserGroup.PUT("/like", func(c *gin.Context) {
 			service.UpdateLike(c)

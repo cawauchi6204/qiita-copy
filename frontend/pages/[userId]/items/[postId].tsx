@@ -1,7 +1,7 @@
 import axios from "axios"
 import { GetServerSideProps } from "next"
 import Image from "next/image"
-import { Facebook, MoreHorizontal, Pocket, Tag as TagIcon, Twitter } from "react-feather"
+import { Facebook, MoreHorizontal, Pocket, Twitter } from "react-feather"
 import ReactMarkdown from 'react-markdown'
 import { useRecoilValue } from "recoil"
 
@@ -11,14 +11,12 @@ import LikeButton from "../../../components/LikeButton"
 import Tags from "../../../components/Tags"
 import { userState } from "../../../contexts/UserContext"
 import { Post } from "../../../types/Post"
-import { BlogTag } from "../../../types/BlogTag"
 
 type Props = {
   post: Post
-  tags: BlogTag[]
 }
 
-const postId: React.FC<Props> = ({ post, tags }) => {
+const postId: React.FC<Props> = ({ post }) => {
   const user = useRecoilValue(userState);
   return (
     <Layout>
@@ -57,6 +55,5 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { userId, postId } = context.params
   // FIXME: 意味がないのでpost/postIdにするべき
   const posts = await axios.get<Post>(`http://localhost/user/${userId}/items/${postId}`)
-  const tags = await axios.get<BlogTag[]>(`http://localhost/post/${postId}/tags`)
-  return { props: { post: posts.data, tags: tags.data } }
+  return { props: { post: posts.data } }
 }

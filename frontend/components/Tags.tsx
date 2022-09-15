@@ -15,7 +15,7 @@ const Tags: React.FC<Props> = ({ postId }) => {
         tags.length > 0 && (
           <div className="mt-4 text-gray-600 flex gap-2 items-center">
             <TagIcon className="inline" size={20} />
-            {tags.map((tag) => (<Link href={`/tags/${tag.tagId}`}><a><span>{tag.tagId},</span></a></Link>))}
+            {tags.map((tag) => (<Link key={tag.id} href={`/tags/${tag.tagId}`}><a><span>{tag.tagId},</span></a></Link>))}
           </div>
         )
       }

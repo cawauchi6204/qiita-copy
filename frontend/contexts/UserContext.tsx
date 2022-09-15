@@ -10,6 +10,7 @@ export const userState = atom<User | undefined>({
 		password: '',
 		email: '',
 		description: '',
+    imgUrl: '',
 		hpUrl: '',
 		location: '',
 		githubAccountId: '',

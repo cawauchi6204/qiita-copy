@@ -13,5 +13,8 @@ const warningIgnoreConfig = withInterceptStdout(
 
 module.exports = {
   reactStrictMode: true,
-  ...warningIgnoreConfig
+  ...warningIgnoreConfig,
+  images: {
+    domains: ['qiita-copy-cawauchi.s3.ap-northeast-1.amazonaws.com']
+  }
 }
