@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Mail, Bell, User } from 'react-feather'
+import { Mail, Bell } from 'react-feather'
 import {
   Menu,
   MenuItem,
@@ -29,7 +29,7 @@ const Header: React.FC<Props> = ({ showNavBars = true }) => {
             <input className="w-72 h-10 text-xs p-2 font-normal" type="text" placeholder="記事を検索" />
             {user && user.id !== "" ? (
               <>
-                <Menu className="inline" menuButton={<MenuButton><Mail className="inline ml-4" color="white" size={24} /></MenuButton>}>
+                <Menu className="inline z-index-10" menuButton={<MenuButton><Mail className="inline ml-4" color="white" size={24} /></MenuButton>}>
                   <Link href="/mypage">
                     <a>
                       <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
@@ -38,7 +38,7 @@ const Header: React.FC<Props> = ({ showNavBars = true }) => {
                     </a>
                   </Link>
                 </Menu>
-                <Menu className="inline" menuButton={<MenuButton><Bell className="inline ml-4" color="white" size={24} /></MenuButton>}>
+                <Menu className="inline z-index-10" menuButton={<MenuButton><Bell className="inline ml-4" color="white" size={24} /></MenuButton>}>
                   <Link href="/mypage">
                     <a>
                       <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
@@ -47,7 +47,7 @@ const Header: React.FC<Props> = ({ showNavBars = true }) => {
                     </a>
                   </Link>
                 </Menu>
-                <Menu className="inline" menuButton={<MenuButton><div className="ml-4"><Icon src={user.imgUrl} width={24} height={24} /></div></MenuButton>}>
+                <Menu className="inline z-index-10" menuButton={<MenuButton><div className="ml-4"><Icon src={user.imgUrl} width={24} height={24} /></div></MenuButton>}>
                   <Link href={`/${user.id}`}>
                     <a>
                       <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">

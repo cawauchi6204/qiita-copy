@@ -40,8 +40,8 @@ const postId: React.FC<Props> = ({ post }) => {
           </div>
         </div>
         <div className="w-3/12 flex flex-col gap-16">
-          <Image src="/adv-1.png" width={300} height={250} />
-          <Image src="/adv-2.png" width={300} height={250} />
+          <Image className='z-index-0' src="/adv-1.png" width={300} height={250} />
+          <Image className='z-index-0' src="/adv-2.png" width={300} height={250} />
         </div>
       </div>
     </Layout>

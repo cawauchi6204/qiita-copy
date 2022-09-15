@@ -18,7 +18,7 @@ const TagId: React.FC<Props> = ({ tag, posts }) => {
       <div className="w-1/3">
         <div className="flex flex-col bg-white text-center p-6">
           <div className="mx-auto">
-            <Image src="/adv-1.png" width={150} height={150} />
+            <Image className='z-index-0' src="/adv-1.png" width={150} height={150} />
           </div>
           <p className="mt-2 font-bold">
             {tag.id}

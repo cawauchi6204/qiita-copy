@@ -51,7 +51,7 @@ const Home: NextPage<Props> = ({ posts }) => {
         </div>
         <div className="w-80">
           <a href="https://lp.nijibox.jp/cp/postdev/" target="_blank">
-            <Image src="/adv-3.png" width={300} height={250} />
+            <Image className='z-index-0' src="/adv-3.png" width={300} height={250} />
           </a>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import Image from "next/image"
 import * as S3Client from "../lib/s3Clicent"
 import axios from "axios";
+import router from "next/router";
 
 type Inputs = {
   file: any
@@ -25,10 +26,11 @@ const ProfilePhotoUpload = () => {
   };
   const { name: previewUrl } = register('file');
 
-  const onSubmit = (data: Inputs) => {
+  const onSubmit = async (data: Inputs) => {
     const uploadFileName = `${data.file.split("blob:http://localhost:3000/")[1]}${fileName}`
-    S3Client.upload(uploadFileName, content)
-    updateProfileUrl(uploadFileName)
+    await S3Client.upload(uploadFileName, content)
+    await updateProfileUrl(uploadFileName)
+    router.reload()
   }
 
   const updateProfileUrl = async (imgUrl: string) => {
