@@ -3,16 +3,12 @@ package repository
 import (
 	"fmt"
 	"log"
+
+	"github.com/cawauchi6204/qiita-copy/cmd/entity"
 )
 
-type PostTag struct {
-	ID     uint   `gorm:"primaryKey" json:"id"`
-	PostId string `json:"postId"`
-	TagId  string `json:"tagId"`
-}
-
-func FindTagsByPostId(postId string) (postTags []PostTag) {
-	postTags = []PostTag{}
+func FindTagsByPostId(postId string) (postTags []entity.PostTag) {
+	postTags = []entity.PostTag{}
 	if err := DB.Find(&postTags, "post_id = ?", postId).Error; err != nil {
 		fmt.Println(err)
 	}
@@ -20,7 +16,7 @@ func FindTagsByPostId(postId string) (postTags []PostTag) {
 }
 
 func FindPostsIdsByTagId(tagId string) (postIds []string) {
-	postTag := []PostTag{}
+	postTag := []entity.PostTag{}
 	if err := DB.Find(&postTag, "tag_id = ?", tagId).Error; err != nil {
 		fmt.Println(err)
 	}
@@ -33,12 +29,12 @@ func FindPostsIdsByTagId(tagId string) (postIds []string) {
 	return
 }
 
-func CreatePostTag(postTag PostTag) PostTag {
+func CreatePostTag(postTag entity.PostTag) entity.PostTag {
 	result := DB.Create(&postTag)
 	if result.Error != nil {
 		log.Fatal(result.Error)
 	}
-	return PostTag{
+	return entity.PostTag{
 		ID:     postTag.ID,
 		PostId: postTag.PostId,
 		TagId:  postTag.TagId,

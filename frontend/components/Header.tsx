@@ -47,7 +47,7 @@ const Header: React.FC<Props> = ({ showNavBars = true }) => {
                     </a>
                   </Link>
                 </Menu>
-                <Menu className="inline z-index-10" menuButton={<MenuButton><div className="ml-4"><Icon src={user.imgUrl} width={24} height={24} /></div></MenuButton>}>
+                <Menu className="inline z-10" menuButton={<MenuButton><div className="ml-4"><Icon src={user.imgUrl} width={24} height={24} /></div></MenuButton>}>
                   <Link href={`/${user.id}`}>
                     <a>
                       <MenuItem className="text-xs font-normal p-4 w-40 bg-white hover:bg-gray-300">
