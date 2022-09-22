@@ -5,7 +5,7 @@ import (
 
 	"github.com/cawauchi6204/qiita-copy/cmd/application/service"
 	"github.com/cawauchi6204/qiita-copy/cmd/common/crypto"
-	"github.com/cawauchi6204/qiita-copy/cmd/infrastructure/repository"
+	"github.com/cawauchi6204/qiita-copy/cmd/entity"
 	"github.com/cawauchi6204/qiita-copy/cmd/infrastructure/session"
 	"github.com/cawauchi6204/qiita-copy/cmd/presentation/request"
 	"github.com/gin-gonic/gin"
@@ -46,7 +46,7 @@ func Login(c *gin.Context) {
 	}
 }
 
-func GetMyInfo(c *gin.Context) (user repository.User) {
+func GetMyInfo(c *gin.Context) (user entity.User) {
 	cookieKey := "loginUserIdKey"
 	email := session.GetSession(c, cookieKey)
 	user = service.GetUserByEmail(email)

@@ -3,34 +3,35 @@ package service
 import (
 	"time"
 
+	"github.com/cawauchi6204/qiita-copy/cmd/entity"
 	"github.com/cawauchi6204/qiita-copy/cmd/infrastructure/repository"
 	"github.com/cawauchi6204/qiita-copy/cmd/presentation/request"
 	"gorm.io/gorm"
 )
 
-func GetAllUsers() (users []repository.User) {
+func GetAllUsers() (users []entity.User) {
 	users = repository.FindUsersAll()
 	return
 }
 
-func GetUserById(userId string) (user repository.User) {
+func GetUserById(userId string) (user entity.User) {
 	user = repository.FindUserById(userId)
 	return
 }
 
-func GetUsersById(userIds []string) (users []repository.User) {
+func GetUsersById(userIds []string) (users []entity.User) {
 	users = repository.FindUsersById(userIds)
 	return
 }
 
-func GetUserByEmail(email string) (user repository.User) {
+func GetUserByEmail(email string) (user entity.User) {
 	user = repository.FindUserByEmail(email)
 	return
 }
 
 func CreateUser(id, email, password string) (result *gorm.DB) {
 	// TODO: これはEntityに持たせたい
-	u := repository.User{
+	u := entity.User{
 		ID:        id,
 		Email:     email,
 		Password:  password,
@@ -41,7 +42,7 @@ func CreateUser(id, email, password string) (result *gorm.DB) {
 	return
 }
 
-func UpdateUser(u repository.User, request request.UpdateUserRequest) {
+func UpdateUser(u entity.User, request request.UpdateUserRequest) {
 	// TODO: 冗長すぎてやばいのでgolangでの三項演算子的なものが知りたい
 	if request.Name != "" {
 		u.Name = request.Name
